@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Style Layout</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="bg-gray-900 text-white font-sans">
+    <!-- Sidebar -->
+    <div class="fixed left-0 top-0 w-16 h-full bg-gray-800 flex flex-col items-center py-4 space-y-6 z-20">
+        <!-- Logo -->
+        <div class="w-8 h-8 bg-red-600 flex items-center justify-center text-white font-bold text-sm rounded">
+            N
+        </div>
+
+        <!-- Navigation Icons -->
+        <div class="flex flex-col space-y-4 text-gray-400">
+            <i class="fas fa-th text-lg cursor-pointer sidebar-icon"></i>
+            <i class="fas fa-play text-lg cursor-pointer sidebar-icon"></i>
+            <i class="fas fa-bookmark text-lg cursor-pointer sidebar-icon"></i>
+            <i class="fas fa-heart text-lg cursor-pointer sidebar-icon"></i>
+        </div>
+
+        <!-- User Avatar -->
+        <div class="mt-auto">
+            <div
+                class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-500 transition-colors">
+                <i class="fas fa-user text-sm"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="ml-16 p-6">
+        <!-- Header -->
+        <div class="mb-8">
+            <!-- Search Bar -->
+            <div class="relative mb-6">
+                <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                <input type="text" placeholder="Search for movies or TV series" id="searchInput"
+                    class="w-full max-w-md bg-gray-800 border border-gray-700 rounded-lg py-3 pl-12 pr-4 text-white placeholder-gray-400 transition-all duration-200">
+            </div>
+        </div>
+
+        <!-- Trending Section -->
+        <div class="mb-10">
+            <h2 class="text-2xl font-semibold mb-6">Trending</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Trending Item 1 -->
+                <div class="card-item cursor-pointer">
+                    <div class="trending-card-1 aspect-video rounded-lg overflow-hidden relative">
+                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <h3 class="text-lg font-semibold">Beyond Earth</h3>
+                            <p class="text-sm text-gray-300">2019 • Movie • PG</p>
+                        </div>
+                        <div
+                            class="absolute top-4 right-4 bg-black bg-opacity-50 rounded-full p-2 play-btn-hidden play-btn-hover">
+                            <i class="fas fa-play text-white text-sm"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trending Item 2 -->
+                <div class="card-item cursor-pointer">
+                    <div class="trending-card-2 aspect-video rounded-lg overflow-hidden relative">
+                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <h3 class="text-lg font-semibold">Bottom Gear</h3>
+                            <p class="text-sm text-gray-300">2021 • Movie • PG</p>
+                        </div>
+                        <div
+                            class="absolute top-4 right-4 bg-black bg-opacity-50 rounded-full p-2 play-btn-hidden play-btn-hover">
+                            <i class="fas fa-play text-white text-sm"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trending Item 3 -->
+                <div class="card-item cursor-pointer">
+                    <div class="trending-card-3 aspect-video rounded-lg overflow-hidden relative">
+                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <h3 class="text-lg font-semibold">Undiscovered Cities</h3>
+                            <p class="text-sm text-gray-300">2019 • TV Series • E</p>
+                        </div>
+                        <div
+                            class="absolute top-4 right-4 bg-black bg-opacity-50 rounded-full p-2 play-btn-hidden play-btn-hover">
+                            <i class="fas fa-play text-white text-sm"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recommended Section -->
+        <div>
+            <h2 class="text-2xl font-semibold mb-6">Recommended for you</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <!-- Recommended Items -->
+                <div class="card-item cursor-pointer">
+                    <div class="recommended-card-1 aspect-[3/4] rounded-lg overflow-hidden relative">
+                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+                        <div class="absolute bottom-3 left-3">
+                            <h3 class="text-sm font-semibold">The Great Lands</h3>
+                            <p class="text-xs text-gray-300">2019 • Movie</p>
+                        </div>
+                        <div
+                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 play-btn-hidden play-btn-hover">
+                            <i class="fas fa-play text-white text-xs"></i>
+                        </div>
+                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1">
+                            <i class="fas fa-bookmark text-white text-xs"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-item cursor-pointer">
+                    <div class="recommended-card-2 aspect-[3/4] rounded-lg overflow-hidden relative">
+                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+                        <div class="absolute bottom-3 left-3">
+                            <h3 class="text-sm font-semibold">The Diary</h3>
+                            <p class="text-xs text-gray-300">2019 • TV Series • PG</p>
+                        </div>
+                        <div
+                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 play-btn-hidden play-btn-hover">
+                            <i class="fas fa-play text-white text-xs"></i>
+                        </div>
+                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1">
+                            <i class="fas fa-bookmark text-white text-xs"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-item cursor-pointer">
+                    <div class="recommended-card-3 aspect-[3/4] rounded-lg overflow-hidden relative">
+                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+                        <div class="absolute bottom-3 left-3">
+                            <h3 class="text-sm font-semibold">Earth's Untouched</h3>
+                            <p class="text-xs text-gray-300">2017 • Movie • E</p>
+                        </div>
+                        <div
+                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 play-btn-hidden play-btn-hover">
+                            <i class="fas fa-play text-white text-xs"></i>
+                        </div>
+                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1">
+                            <i class="fas fa-tv text-white text-xs"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-item cursor-pointer">
+                    <div class="recommended-card-4 aspect-[3/4] rounded-lg overflow-hidden relative">
+                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+                        <div class="absolute bottom-3 left-3">
+                            <h3 class="text-sm font-semibold">No Land Beyond</h3>
+                            <p class="text-xs text-gray-300">2019 • Movie • E</p>
+                        </div>
+                        <div
+                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 play-btn-hidden play-btn-hover">
+                            <i class="fas fa-play text-white text-xs"></i>
+                        </div>
+                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1">
+                            <i class="fas fa-bookmark text-white text-xs"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-item cursor-pointer">
+                    <div class="recommended-card-5 aspect-[3/4] rounded-lg overflow-hidden relative">
+                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+                        <div class="absolute bottom-3 left-3">
+                            <h3 class="text-sm font-semibold">During the Hunt</h3>
+                            <p class="text-xs text-gray-300">2016 • TV Series • E</p>
+                        </div>
+                        <div
+                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 play-btn-hidden play-btn-hover">
+                            <i class="fas fa-play text-white text-xs"></i>
+                        </div>
+                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1">
+                            <i class="fas fa-tv text-white text-xs"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-item cursor-pointer">
+                    <div class="recommended-card-6 aspect-[3/4] rounded-lg overflow-hidden relative">
+                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+                        <div class="absolute bottom-3 left-3">
+                            <h3 class="text-sm font-semibold">Autosport the Series</h3>
+                            <p class="text-xs text-gray-300">2016 • TV Series • E</p>
+                        </div>
+                        <div
+                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 play-btn-hidden play-btn-hover">
+                            <i class="fas fa-play text-white text-xs"></i>
+                        </div>
+                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1">
+                            <i class="fas fa-bookmark text-white text-xs"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-item cursor-pointer">
+                    <div class="recommended-card-7 aspect-[3/4] rounded-lg overflow-hidden relative">
+                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+                        <div class="absolute bottom-3 left-3">
+                            <h3 class="text-sm font-semibold">Same Answer II</h3>
+                            <p class="text-xs text-gray-300">2017 • Movie • E</p>
+                        </div>
+                        <div
+                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 play-btn-hidden play-btn-hover">
+                            <i class="fas fa-play text-white text-xs"></i>
+                        </div>
+                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1">
+                            <i class="fas fa-bookmark text-white text-xs"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-item cursor-pointer">
+                    <div class="recommended-card-8 aspect-[3/4] rounded-lg overflow-hidden relative">
+                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+                        <div class="absolute bottom-3 left-3">
+                            <h3 class="text-sm font-semibold">Below Echo</h3>
+                            <p class="text-xs text-gray-300">2016 • TV Series • PG</p>
+                        </div>
+                        <div
+                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 play-btn-hidden play-btn-hover">
+                            <i class="fas fa-play text-white text-xs"></i>
+                        </div>
+                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1">
+                            <i class="fas fa-bookmark text-white text-xs"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add hover effects for cards
+        document.querySelectorAll('.card-item').forEach(item => {
+            item.addEventListener('mouseenter', function () {
+                this.classList.add('hover-scale');
+            });
+
+            item.addEventListener('mouseleave', function () {
+                this.classList.remove('hover-scale');
+            });
+        });
+    </script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
