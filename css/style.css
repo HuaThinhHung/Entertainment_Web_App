@@ -8,7 +8,7 @@
 
 .hover-scale {
     transform: scale(1.05);
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease-in-out;
 }
 
 /* =============================================================================
@@ -26,15 +26,27 @@
    ============================================================================= */
 
 .trending-card-1 {
-    background: linear-gradient(45deg, #1e3a8a, #581c87);
+    background-image: url('../images/1.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
 }
 
 .trending-card-2 {
-    background: linear-gradient(45deg, #374151, #1f2937);
+    background-image: url('../images/2.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
 }
 
 .trending-card-3 {
-    background: linear-gradient(45deg, #9a3412, #92400e);
+    background-image: url('../images/3.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
 }
 
 /* =============================================================================
@@ -42,36 +54,226 @@
    ============================================================================= */
 
 .recommended-card-1 {
-    background: linear-gradient(45deg, #065f46, #0f766e);
+    background-image: url('../images/trend1.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
 }
 
 .recommended-card-2 {
-    background: linear-gradient(45deg, #92400e, #c2410c);
+    background-image: url('../images/trend2.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
 }
 
 .recommended-card-3 {
-    background: linear-gradient(45deg, #991b1b, #be185d);
+    background-image: url('../images/trend3.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
 }
 
 .recommended-card-4 {
-    background: linear-gradient(45deg, #6b21a8, #3730a3);
+    background-image: url('../images/4.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
 }
 
 .recommended-card-5 {
-    background: linear-gradient(45deg, #be185d, #e11d48);
+    background-image: url('../images/5.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
 }
 
 .recommended-card-6 {
-    background: linear-gradient(45deg, #334155, #1e293b);
+    background-image: url('../images/6.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
 }
 
 .recommended-card-7 {
-    background: linear-gradient(45deg, #a16207, #d97706);
+    background-image: url('../images/7.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
 }
 
 .recommended-card-8 {
-    background: linear-gradient(45deg, #1e40af, #0891b2);
+    background-image: url('../images/8.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
 }
+
+.recommended-card-9 {
+    background-image: url('../images/9.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}
+
+.recommended-card-10 {
+    background-image: url('../images/10.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}
+
+.recommended-card-11 {
+    background-image: url('../images/11.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}
+
+.recommended-card-12 {
+    background-image: url('../images/12.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}
+
+.recommended-card-13 {
+    background-image: url('../images/13.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}
+
+.recommended-card-14 {
+    background-image: url('../images/14.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}
+
+.recommended-card-15 {
+    background-image: url('../images/15.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}
+
+.recommended-card-16 {
+    background-image: url('../images/16.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}
+
+.recommended-card-17 {
+    background-image: url('../images/17.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}
+
+.recommended-card-18 {
+    background-image: url('../images/18.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}
+
+.recommended-card-19 {
+    background-image: url('../images/19.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}
+
+.recommended-card-20 {
+    background-image: url('../images/20.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}
+
+.recommended-card-21 {
+    background-image: url('../images/21.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}
+
+.recommended-card-22 {
+    background-image: url('../images/22.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}
+
+.recommended-card-23 {
+    background-image: url('../images/23.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}
+
+.recommended-card-24 {
+    background-image: url('../images/24.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}
+
+.recommended-card-25 {
+    background-image: url('../images/25.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}
+.recommended-card-26 {
+    background-image: url('../images/26.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}
+.recommended-card-27 {
+    background-image: url('../images/27.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}
+.recommended-card-28 {
+    background-image: url('../images/28.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}
+
 
 /* =============================================================================
    CARD HOVER EFFECTS & ANIMATIONS
@@ -85,7 +287,7 @@
 
 .play-btn-hidden {
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease-in-out;
 }
 
 .card-item:hover .play-btn-hidden {
@@ -103,12 +305,11 @@
    ============================================================================= */
 
 .sidebar-icon {
-    position: relative;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease-in-out;
 }
 
-.sidebar-icon:hover {
-    color: #ffffff;
+.sidebar-icon:hover, .sidebar-icon.active {
+    color: white;
     transform: scale(1.1);
 }
 
@@ -152,6 +353,7 @@
         opacity: 0;
         transform: translateY(-50%) translateX(-10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(-50%) translateX(0);
@@ -167,11 +369,11 @@
     .card-item {
         margin-bottom: 1rem;
     }
-    
+
     .trending-card h3 {
         font-size: 1rem;
     }
-    
+
     .recommended-card h3 {
         font-size: 0.75rem;
     }
@@ -222,7 +424,111 @@
     0% {
         background-position: 200% 0;
     }
+
     100% {
         background-position: -200% 0;
     }
+}
+
+/* Card background images */
+.trending-card-1, .trending-card-2, .trending-card-3,
+.recommended-card-1, .recommended-card-2, .recommended-card-3,
+.recommended-card-4, .recommended-card-5, .recommended-card-6,
+.recommended-card-7, .recommended-card-8, .recommended-card-9,
+.recommended-card-10, .recommended-card-11, .recommended-card-12,
+.recommended-card-13, .recommended-card-14, .recommended-card-15,
+.recommended-card-16, .recommended-card-17, .recommended-card-18,
+.recommended-card-19, .recommended-card-20, .recommended-card-21,
+.recommended-card-22, .recommended-card-23, .recommended-card-24,
+.recommended-card-25, .recommended-card-26, .recommended-card-27,
+.recommended-card-28 {
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card-item:hover .trending-card-1,
+.card-item:hover .trending-card-2,
+.card-item:hover .trending-card-3,
+.card-item:hover .recommended-card-1,
+.card-item:hover .recommended-card-2,
+.card-item:hover .recommended-card-3,
+.card-item:hover .recommended-card-4,
+.card-item:hover .recommended-card-5,
+.card-item:hover .recommended-card-6,
+.card-item:hover .recommended-card-7,
+.card-item:hover .recommended-card-8,
+.card-item:hover .recommended-card-9,
+.card-item:hover .recommended-card-10,
+.card-item:hover .recommended-card-11,
+.card-item:hover .recommended-card-12,
+.card-item:hover .recommended-card-13,
+.card-item:hover .recommended-card-14,
+.card-item:hover .recommended-card-15,
+.card-item:hover .recommended-card-16,
+.card-item:hover .recommended-card-17,
+.card-item:hover .recommended-card-18,
+.card-item:hover .recommended-card-19,
+.card-item:hover .recommended-card-20,
+.card-item:hover .recommended-card-21,
+.card-item:hover .recommended-card-22,
+.card-item:hover .recommended-card-23,
+.card-item:hover .recommended-card-24,
+.card-item:hover .recommended-card-25,
+.card-item:hover .recommended-card-26,
+.card-item:hover .recommended-card-27,
+.card-item:hover .recommended-card-28 {
+    transform: scale(1.1);
+}
+
+/* Modal animation */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.modal-content {
+    animation: modalFadeIn 0.3s ease-out;
+}
+
+/* Feedback animation */
+@keyframes slideIn {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.feedback {
+    animation: slideIn 0.3s ease-out;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1f2937;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4b5563;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
 }
