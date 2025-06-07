@@ -1,47 +1,52 @@
-🎬 Netflix UI Clone
-Một dự án giao diện người dùng (UI) mô phỏng Netflix, hiển thị các bộ phim và series dưới dạng lưới, có phân loại như Trending, Recommended for you, với sidebar, thanh tìm kiếm, và bookmark.
+# 🎬 Netflix UI Clone
 
-📸 Giao diện
+Một dự án giao diện người dùng mô phỏng Netflix với thiết kế hiện đại, trực quan, phù hợp cho mục đích học tập hoặc trình diễn kỹ năng HTML/CSS/JavaScript.
 
-🚀 Chức năng chính
-Giao diện giống Netflix
+---
 
-Phân loại phim: Trending, Recommended for you
+## 🎯 Tính năng nổi bật
 
-Tìm kiếm phim hoặc series
+- 🔥 Hiển thị danh mục **Trending** và **Recommended for you**
+- 🔍 Thanh tìm kiếm phim hoặc series
+- 📌 Chức năng **Bookmark** phim yêu thích
+- 🎨 Giao diện được thiết kế tương tự Netflix
+- 📱 Responsive – Tương thích với mọi thiết bị
+- 🌙 Dark mode mặc định
 
-Hiệu ứng hover đẹp mắt
+---
 
-Bookmark phim yêu thích
+## 🚀 Công nghệ sử dụng
 
-Responsive (tương thích mọi thiết bị)
+| Công nghệ     | Mục đích                                |
+|--------------|------------------------------------------|
+| ⚙️ HTML5       | Cấu trúc nội dung trang                 |
+| 🎨 CSS3        | Thiết kế bố cục, hiệu ứng giao diện     |
+| 🧠 JavaScript  | Tương tác người dùng, xử lý bookmark,...|
+| 🎯 FontAwesome | Biểu tượng (icon) như bookmark, tìm kiếm|
+| 🧩 VS Code     | Môi trường phát triển mã nguồn          |
 
-🛠️ Công nghệ sử dụng
-Công nghệ	Mục đích
-HTML5	---------------------------- Cấu trúc nội dung trang
-CSS3	---------------------------- Thiết kế giao diện và bố cục
-JavaScript	---------------------- Tương tác người dùng, xử lý sự kiện
-FontAwesome	---------------------- Icon đánh dấu (bookmark, tìm kiếm,...)
-VS Code -------------------------- Môi trường phát triển
+---
+
+## 📁 Cấu trúc thư mục
+
+📁 netflix-ui-clone/
+├── 📁 .vscode/ # Cấu hình cho VS Code
+├── 📁 css/ # Các file CSS chính (style.css,...)
+├── 📁 images/ # Hình ảnh poster phim
+├── 📁 js/ # File JavaScript chính
+├── 📄 index.html # Trang chính
+└── 📄 README.md # Tài liệu hướng dẫn này
 
 
-├── .vscode/              # Cấu hình VSCode
-├── css/                  # File CSS (style.css, ...)
-├── images/               # Hình ảnh và poster phim
-├── js/                   # Các file JavaScript
-├── index.html            # Trang chính
-└── README.md             # Tài liệu này
+---
 
-▶️ Cách sử dụng
-1. Clone dự án
+## 🛠️ Cách sử dụng
+
+### 🔽 1. Tải về hoặc Clone dự án
+
 git clone https://github.com/ten-ban/netflix-ui-clone.git
 
-💡 Ghi chú
-Đây là giao diện mô phỏng, không chứa video thật.
+📸 Hình ảnh minh hoạ
+![Screenshot 2025-06-08 022532](https://github.com/user-attachments/assets/4442f3c3-800f-4838-adfe-2f8fc1dff5b8)
 
-Bạn có thể tích hợp API từ TMDB để hiển thị nội dung động.
 
-Dự án thích hợp cho học tập HTML/CSS/JS.
-
-👨‍💻 Tác giả
-HuaThinhHung
