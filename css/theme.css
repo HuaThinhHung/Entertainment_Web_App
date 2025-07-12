@@ -1,0 +1,412 @@
+/* =============================================================================
+   Netflix Clone - Theme System
+   ============================================================================= */
+
+/* =============================================================================
+   DARK THEME (DEFAULT)
+   ============================================================================= */
+
+[data-theme="dark"] {
+    --bg-primary: #0f0f0f;
+    --bg-secondary: #1a1a1a;
+    --bg-tertiary: #2d2d2d;
+    --bg-quaternary: #404040;
+    --text-primary: #ffffff;
+    --text-secondary: #b3b3b3;
+    --text-muted: #808080;
+    --accent-color: #e50914;
+    --accent-hover: #f40612;
+    --border-color: #404040;
+    --border-light: #2d2d2d;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --shadow-light: rgba(0, 0, 0, 0.2);
+    --overlay-color: rgba(0, 0, 0, 0.8);
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --error-color: #ef4444;
+}
+
+/* =============================================================================
+   LIGHT THEME
+   ============================================================================= */
+
+[data-theme="light"] {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-tertiary: #e9ecef;
+    --bg-quaternary: #dee2e6;
+    --text-primary: #1a1a1a;
+    --text-secondary: #4a4a4a;
+    --text-muted: #6c757d;
+    --accent-color: #e50914;
+    --accent-hover: #f40612;
+    --border-color: #dee2e6;
+    --border-light: #e9ecef;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --shadow-light: rgba(0, 0, 0, 0.05);
+    --overlay-color: rgba(0, 0, 0, 0.5);
+    --success-color: #059669;
+    --warning-color: #d97706;
+    --error-color: #dc2626;
+}
+
+/* =============================================================================
+   THEME TRANSITIONS
+   ============================================================================= */
+
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* =============================================================================
+   BODY THEMES
+   ============================================================================= */
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+/* =============================================================================
+   BACKGROUND COLORS
+   ============================================================================= */
+
+.bg-gray-900 {
+    background-color: var(--bg-primary) !important;
+}
+
+.bg-gray-800 {
+    background-color: var(--bg-secondary) !important;
+}
+
+.bg-gray-700 {
+    background-color: var(--bg-tertiary) !important;
+}
+
+.bg-gray-600 {
+    background-color: var(--bg-quaternary) !important;
+}
+
+.bg-black {
+    background-color: var(--overlay-color) !important;
+}
+
+.bg-white {
+    background-color: var(--bg-primary) !important;
+}
+
+/* =============================================================================
+   TEXT COLORS
+   ============================================================================= */
+
+.text-white {
+    color: var(--text-primary) !important;
+}
+
+.text-gray-300 {
+    color: var(--text-secondary) !important;
+}
+
+.text-gray-400 {
+    color: var(--text-muted) !important;
+}
+
+.text-gray-500 {
+    color: var(--text-muted) !important;
+}
+
+.text-gray-600 {
+    color: var(--text-secondary) !important;
+}
+
+.text-gray-700 {
+    color: var(--text-primary) !important;
+}
+
+.text-gray-800 {
+    color: var(--text-primary) !important;
+}
+
+.text-gray-900 {
+    color: var(--text-primary) !important;
+}
+
+/* =============================================================================
+   BORDER COLORS
+   ============================================================================= */
+
+.border-gray-700 {
+    border-color: var(--border-color) !important;
+}
+
+.border-gray-600 {
+    border-color: var(--border-light) !important;
+}
+
+.border-gray-500 {
+    border-color: var(--border-light) !important;
+}
+
+.border-gray-400 {
+    border-color: var(--border-light) !important;
+}
+
+.border-gray-300 {
+    border-color: var(--border-light) !important;
+}
+
+.border-gray-200 {
+    border-color: var(--border-light) !important;
+}
+
+/* =============================================================================
+   ACCENT COLORS
+   ============================================================================= */
+
+.text-red-500 {
+    color: var(--accent-color) !important;
+}
+
+.text-red-600 {
+    color: var(--accent-hover) !important;
+}
+
+.bg-red-600 {
+    background-color: var(--accent-color) !important;
+}
+
+.bg-red-700 {
+    background-color: var(--accent-hover) !important;
+}
+
+.hover\:bg-red-700:hover {
+    background-color: var(--accent-hover) !important;
+}
+
+.hover\:text-red-500:hover {
+    color: var(--accent-color) !important;
+}
+
+/* =============================================================================
+   HOVER STATES
+   ============================================================================= */
+
+.hover\:bg-gray-700:hover {
+    background-color: var(--bg-tertiary) !important;
+}
+
+.hover\:bg-gray-600:hover {
+    background-color: var(--bg-quaternary) !important;
+}
+
+.hover\:bg-gray-500:hover {
+    background-color: var(--bg-quaternary) !important;
+}
+
+.hover\:text-white:hover {
+    color: var(--text-primary) !important;
+}
+
+.hover\:text-gray-300:hover {
+    color: var(--text-secondary) !important;
+}
+
+/* =============================================================================
+   FOCUS STATES
+   ============================================================================= */
+
+.focus\:border-red-600:focus {
+    border-color: var(--accent-color) !important;
+}
+
+.focus\:outline-none:focus {
+    outline: none !important;
+}
+
+/* =============================================================================
+   PLACEHOLDER COLORS
+   ============================================================================= */
+
+.placeholder-gray-400::placeholder {
+    color: var(--text-muted) !important;
+}
+
+/* =============================================================================
+   SHADOW COLORS
+   ============================================================================= */
+
+.shadow-lg {
+    box-shadow: 0 10px 15px -3px var(--shadow-color), 0 4px 6px -2px var(--shadow-light) !important;
+}
+
+.shadow-xl {
+    box-shadow: 0 20px 25px -5px var(--shadow-color), 0 10px 10px -5px var(--shadow-light) !important;
+}
+
+/* =============================================================================
+   MODAL OVERLAY
+   ============================================================================= */
+
+.bg-opacity-80 {
+    background-color: var(--overlay-color) !important;
+}
+
+.bg-opacity-60 {
+    background-color: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* =============================================================================
+   CUSTOM COMPONENT THEMES
+   ============================================================================= */
+
+/* Movie Cards */
+.movie-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-light);
+}
+
+.movie-card:hover {
+    border-color: var(--accent-color);
+}
+
+/* Search Input */
+#searchInput {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+#searchInput:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.1);
+}
+
+/* Search Suggestions */
+#searchSuggestions {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+.search-suggestion-item:hover {
+    background-color: var(--bg-tertiary);
+}
+
+/* Modal */
+#movieModal .bg-gray-800 {
+    background-color: var(--bg-secondary) !important;
+}
+
+/* Sidebar */
+.sidebar-icon {
+    color: var(--text-muted);
+}
+
+.sidebar-icon:hover,
+.sidebar-icon.active {
+    color: var(--accent-color);
+}
+
+/* Mobile Menu */
+#mobileSidebar .bg-gray-800 {
+    background-color: var(--bg-secondary) !important;
+}
+
+.mobile-nav-btn {
+    color: var(--text-muted);
+}
+
+.mobile-nav-btn:hover {
+    background-color: var(--bg-tertiary);
+    color: var(--accent-color);
+}
+
+/* Theme Toggle */
+#themeToggle button {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+    color: var(--text-muted);
+}
+
+#themeToggle button:hover {
+    background-color: var(--bg-tertiary);
+    color: var(--accent-color);
+}
+
+/* Loading Overlay */
+#overlayLoading {
+    background-color: var(--overlay-color);
+}
+
+.spinner {
+    border-color: var(--border-color);
+    border-top-color: var(--accent-color);
+}
+
+/* =============================================================================
+   RESPONSIVE THEME ADJUSTMENTS
+   ============================================================================= */
+
+@media (max-width: 768px) {
+    [data-theme="light"] {
+        --shadow-color: rgba(0, 0, 0, 0.08);
+        --shadow-light: rgba(0, 0, 0, 0.03);
+    }
+    
+    [data-theme="dark"] {
+        --shadow-color: rgba(0, 0, 0, 0.4);
+        --shadow-light: rgba(0, 0, 0, 0.15);
+    }
+}
+
+/* =============================================================================
+   HIGH CONTRAST MODE SUPPORT
+   ============================================================================= */
+
+@media (prefers-contrast: high) {
+    [data-theme="dark"] {
+        --text-primary: #ffffff;
+        --text-secondary: #ffffff;
+        --border-color: #ffffff;
+        --accent-color: #ff4444;
+    }
+    
+    [data-theme="light"] {
+        --text-primary: #000000;
+        --text-secondary: #000000;
+        --border-color: #000000;
+        --accent-color: #cc0000;
+    }
+}
+
+/* =============================================================================
+   REDUCED MOTION SUPPORT
+   ============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* =============================================================================
+   PRINT STYLES
+   ============================================================================= */
+
+@media print {
+    [data-theme="dark"],
+    [data-theme="light"] {
+        --bg-primary: #ffffff;
+        --bg-secondary: #ffffff;
+        --text-primary: #000000;
+        --text-secondary: #000000;
+        --border-color: #000000;
+    }
+    
+    .movie-card,
+    .hero-section,
+    #movieModal,
+    #overlayLoading {
+        display: none !important;
+    }
+} 

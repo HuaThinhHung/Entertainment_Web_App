@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Entertainment Web App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="bg-gray-900 text-white min-h-screen">
+    <!-- Header -->
+    <header class="bg-gray-800 shadow-lg">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="text-2xl font-bold text-red-500">
+                        <i class="fas fa-film mr-2"></i>NETFLIX
+                    </a>
+                </div>
+                <nav class="hidden md:flex space-x-6">
+                    <a href="index.html" class="hover:text-red-500 transition-colors">Home</a>
+                    <a href="about.html" class="hover:text-red-500 transition-colors">About</a>
+                    <a href="contact.html" class="hover:text-red-500 transition-colors">Contact</a>
+                    <a href="watchlist.html" class="hover:text-red-500 transition-colors"">Watchlist</a>
+                </nav>
+                <button id=" toggleThemeBtn" class="bg-gray-700 hover:bg-gray-600 p-2 rounded-lg transition-colors">
+                        <i id="themeIcon" class="fas fa-moon"></i>
+                        </button>
+            </div>
+        </div>
+    </header>
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Hero Section -->
+        <section class="text-center mb-16">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">About Entertainment Web App</h1>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                A modern, responsive web application for discovering and managing your favorite movies and TV shows.
+            </p>
+        </section>
+
+        <!-- Features Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-12">Features</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <div class="text-red-500 text-3xl mb-4">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Advanced Search</h3>
+                    <p class="text-gray-300">Search through thousands of movies and TV shows with real-time results and
+                        autocomplete suggestions.</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <div class="text-red-500 text-3xl mb-4">
+                        <i class="fas fa-bookmark"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Bookmark System</h3>
+                    <p class="text-gray-300">Save your favorite content with a powerful bookmark system that syncs
+                        across sessions.</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <div class="text-red-500 text-3xl mb-4">
+                        <i class="fas fa-filter"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Smart Filtering</h3>
+                    <p class="text-gray-300">Filter by genre, year, rating, and more. Sort by popularity, release date,
+                        or user ratings.</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <div class="text-red-500 text-3xl mb-4">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Responsive Design</h3>
+                    <p class="text-gray-300">Fully responsive design that works perfectly on desktop, tablet, and mobile
+                        devices.</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <div class="text-red-500 text-3xl mb-4">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Dark/Light Mode</h3>
+                    <p class="text-gray-300">Toggle between dark and light themes for comfortable viewing in any
+                        environment.</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <div class="text-red-500 text-3xl mb-4">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Real-time Data</h3>
+                    <p class="text-gray-300">Powered by TMDB API with real-time movie and TV show data, ratings, and
+                        trailers.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology Stack -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-12">Technology Stack</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-gray-800 p-6 rounded-lg text-center">
+                    <div class="text-blue-500 text-4xl mb-4">
+                        <i class="fab fa-html5"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">HTML5</h3>
+                    <p class="text-gray-300 text-sm">Semantic markup and modern web standards</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg text-center">
+                    <div class="text-blue-400 text-4xl mb-4">
+                        <i class="fab fa-css3-alt"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">CSS3 & Tailwind</h3>
+                    <p class="text-gray-300 text-sm">Modern styling with utility-first CSS framework</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg text-center">
+                    <div class="text-yellow-400 text-4xl mb-4">
+                        <i class="fab fa-js"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">JavaScript ES6+</h3>
+                    <p class="text-gray-300 text-sm">Modern JavaScript with async/await and modules</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg text-center">
+                    <div class="text-red-500 text-4xl mb-4">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">TMDB API</h3>
+                    <p class="text-gray-300 text-sm">The Movie Database API for real-time content</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Development Process -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-12">Development Process</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="space-y-8">
+                    <div class="flex items-start space-x-4">
+                        <div
+                            class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">
+                            1</div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">Planning & Design</h3>
+                            <p class="text-gray-300">Started with wireframes and user experience design, focusing on
+                                intuitive navigation and modern aesthetics.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div
+                            class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">
+                            2</div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">Core Development</h3>
+                            <p class="text-gray-300">Built the foundation with HTML structure, CSS styling, and basic
+                                JavaScript functionality for movie display and navigation.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div
+                            class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">
+                            3</div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">API Integration</h3>
+                            <p class="text-gray-300">Integrated TMDB API to replace static data with real-time movie and
+                                TV show information, including ratings, cast, and trailers.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div
+                            class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">
+                            4</div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">Advanced Features</h3>
+                            <p class="text-gray-300">Added advanced features like search, filtering, bookmarking,
+                                dark/light mode, and responsive design for mobile devices.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div
+                            class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">
+                            5</div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">Testing & Optimization</h3>
+                            <p class="text-gray-300">Comprehensive testing across different devices and browsers,
+                                performance optimization, and bug fixes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-12">Development Team</h2>
+            <div class="max-w-2xl mx-auto text-center">
+                <div class="bg-gray-800 p-8 rounded-lg">
+                    <div class="w-24 h-24 bg-red-500 rounded-full mx-auto mb-6 flex items-center justify-center">
+                        <i class="fas fa-user text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-2">Developer</h3>
+                    <p class="text-gray-300 mb-4">Full-stack web developer passionate about creating modern,
+                        user-friendly applications.</p>
+                    <div class="flex justify-center space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-red-500 transition-colors">
+                            <i class="fab fa-github text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-red-500 transition-colors">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-red-500 transition-colors">
+                            <i class="fas fa-envelope text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="text-center">
+            <div class="bg-gradient-to-r from-red-600 to-red-700 p-8 rounded-lg">
+                <h2 class="text-3xl font-bold mb-4">Ready to Explore?</h2>
+                <p class="text-xl mb-6">Start discovering amazing movies and TV shows today!</p>
+                <a href="index.html"
+                    class="bg-white text-red-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                    Get Started
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 mt-16">
+        <div class="container mx-auto px-4 py-8">
+            <div class="text-center">
+                <p class="text-gray-300">&copy; 2024 Entertainment Web App. All rights reserved.</p>
+                <div class="mt-4 space-x-4">
+                    <a href="index.html" class="text-gray-300 hover:text-red-500 transition-colors">Home</a>
+                    <a href="about.html" class="text-red-500">About</a>
+                    <a href="contact.html" class="text-gray-300 hover:text-red-500 transition-colors">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/utils.js"></script>
+    <script>
+        // Theme toggle functionality
+        const themeBtn = document.getElementById('toggleThemeBtn');
+        const themeIcon = document.getElementById('themeIcon');
+
+        function setTheme(mode) {
+            if (mode === 'light') {
+                document.body.classList.add('light-mode');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.body.classList.remove('light-mode');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Load theme on page load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') setTheme('light');
+        else setTheme('dark');
+
+        if (themeBtn) {
+            themeBtn.onclick = () => {
+                if (document.body.classList.contains('light-mode')) setTheme('dark');
+                else setTheme('light');
+            };
+        }
+    </script>
+</body>
+
+</html>

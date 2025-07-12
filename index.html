@@ -1,955 +1,198 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Entertainment App</title>
+    <title>Netflix Clone - Entertainment App</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <script type="module" src="js/config.js"></script>
+    <script type="module" src="js/state.js"></script>
+    <script type="module" src="js/components.js"></script>
+    <script type="module" src="js/main.js"></script>
 </head>
 
 <body class="bg-gray-900 text-white font-sans">
-    <!-- Sidebar -->
-    <div class="fixed left-0 top-0 w-16 h-full bg-gray-800 flex flex-col items-center py-4 space-y-6 z-20">
+    <!-- Loading Overlay -->
+    <div id="overlayLoading" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden">
+        <div class="flex items-center space-x-3">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600"></div>
+            <span class="text-white text-lg">Loading...</span>
+        </div>
+    </div>
+
+    <!-- Main Navbar/Header -->
+    <header class="w-full px-4 md:px-8 py-4 flex items-center justify-between bg-transparent z-40 relative">
+        <div class="flex items-center gap-6 w-full max-w-7xl mx-auto">
+            <!-- Logo -->
+            <a href="index.html"
+                class="text-2xl md:text-3xl font-bold text-red-500 flex items-center logo hover:text-red-400 transition-colors">
+                <i class="fas fa-film mr-2"></i>NETFLIX
+            </a>
+            <!-- Navigation -->
+            <nav class="hidden lg:flex space-x-6">
+                <a href="index.html" class="text-red-500 font-semibold hover:text-red-400 transition-colors">Home</a>
+                <a href="about.html" class="text-gray-300 hover:text-red-500 transition-colors">About</a>
+                <a href="contact.html" class="text-gray-300 hover:text-red-500 transition-colors">Contact</a>
+                <a href="watchlist.html" class="text-gray-300 hover:text-red-500 transition-colors">Watchlist</a>
+            </nav>
+            <!-- Search Bar -->
+            <div class="relative flex-1 max-w-xl ml-4">
+                <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                <input type="text" placeholder="Search for movies or TV series..." id="searchInput"
+                    class="w-full bg-gray-800 border border-gray-700 rounded-lg py-2 pl-12 pr-4 text-white placeholder-gray-400 focus:border-red-600 focus:outline-none transition-all duration-200">
+                <!-- Search Suggestions -->
+                <div id="searchSuggestions"
+                    class="absolute top-full left-0 right-0 bg-gray-800 border border-gray-700 rounded-lg mt-1 shadow-lg z-50 hidden max-h-96 overflow-y-auto">
+                    <!-- Suggestions will be populated dynamically -->
+                </div>
+            </div>
+        </div>
+        <!-- Theme Toggle Button -->
+        <div id="themeToggle" class="ml-4">
+            <button id="toggleThemeBtn"
+                class="bg-gray-800 hover:bg-gray-700 p-3 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-500">
+                <i id="themeIcon" class="fas fa-moon text-xl text-gray-300"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu Button -->
+        <div id="hamburgerMenu" class="ml-2 md:hidden">
+            <button id="openMenuBtn"
+                class="bg-gray-800 hover:bg-gray-700 p-3 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-500">
+                <i class="fas fa-bars text-xl text-gray-300"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Sidebar -->
+    <div id="mobileSidebar" class="fixed inset-0 bg-black bg-opacity-60 hidden z-50 md:hidden">
+        <div class="w-3/4 max-w-xs bg-gray-800 h-full flex flex-col p-6 relative">
+            <button id="closeMenuBtn" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+            <!-- Logo -->
+            <div
+                class="w-12 h-12 bg-red-600 flex items-center justify-center text-white font-bold text-xl rounded mb-8">
+                N
+            </div>
+            <!-- Mobile Navigation -->
+            <div class="flex flex-col space-y-4 text-gray-400 text-lg">
+                <button class="mobile-nav-btn flex items-center gap-3 hover:text-red-500 transition-colors"
+                    data-nav="home">
+                    <i class="fas fa-home"></i> Home
+                </button>
+                <button class="mobile-nav-btn flex items-center gap-3 hover:text-red-500 transition-colors"
+                    data-nav="movies">
+                    <i class="fas fa-film"></i> Movies
+                </button>
+                <button class="mobile-nav-btn flex items-center gap-3 hover:text-red-500 transition-colors"
+                    data-nav="tv">
+                    <i class="fas fa-tv"></i> TV Shows
+                </button>
+                <button class="mobile-nav-btn flex items-center gap-3 hover:text-red-500 transition-colors"
+                    data-nav="mylist">
+                    <i class="fas fa-heart"></i> My List
+                </button>
+                <button class="mobile-nav-btn flex items-center gap-3 hover:text-red-500 transition-colors"
+                    data-nav="new">
+                    <i class="fas fa-fire"></i> New & Popular
+                </button>
+                <button class="mobile-nav-btn flex items-center gap-3 hover:text-red-500 transition-colors"
+                    data-nav="bookmark">
+                    <i class="fas fa-bookmark"></i> Bookmarks
+                </button>
+            </div>
+            <!-- Additional Links -->
+            <div class="mt-6 pt-6 border-t border-gray-700">
+                <div class="flex flex-col space-y-4 text-gray-400 text-lg">
+                    <a href="about.html" class="flex items-center gap-3 hover:text-red-500 transition-colors">
+                        <i class="fas fa-info-circle"></i> About
+                    </a>
+                    <a href="contact.html" class="flex items-center gap-3 hover:text-red-500 transition-colors">
+                        <i class="fas fa-envelope"></i> Contact
+                    </a>
+                    <a href="watchlist.html" class="flex items-center gap-3 hover:text-red-500 transition-colors">
+                        <i class="fas fa-clock"></i> Watchlist
+                    </a>
+                </div>
+            </div>
+            <!-- User Avatar -->
+            <div class="mt-auto pt-8">
+                <div
+                    class="w-12 h-12 bg-gray-600 rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-500 transition-colors">
+                    <i class="fas fa-user text-lg text-gray-300"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Desktop Sidebar -->
+    <div
+        class="sidebar-desktop fixed left-0 top-0 w-16 h-full bg-gray-800 flex flex-col items-center py-4 space-y-6 z-30 hidden md:flex">
         <!-- Logo -->
-        <div class="w-8 h-8 bg-red-600 flex items-center justify-center text-white font-bold text-sm rounded">
+        <div
+            class="w-10 h-10 bg-red-600 flex items-center justify-center text-white font-bold text-lg rounded mt-5 mb-6">
             N
         </div>
-
         <!-- Navigation Icons -->
-        <div class="flex flex-col space-y-4 text-gray-400">
-            <i class="fas fa-home text-lg cursor-pointer sidebar-icon active"></i>
-            <i class="fas fa-film text-lg cursor-pointer sidebar-icon"></i>
-            <i class="fas fa-tv text-lg cursor-pointer sidebar-icon"></i>
-            <i class="fas fa-bookmark text-lg cursor-pointer sidebar-icon"></i>
+        <div class="flex flex-col space-y-4 text-gray-400 flex-1 justify-center">
+            <a href="index.html">
+                <i id="sidebarHomeIcon"
+                    class="fas fa-home text-lg cursor-pointer sidebar-icon active hover:text-red-500 transition-colors"></i>
+            </a>
+            <i class="fas fa-film text-lg cursor-pointer sidebar-icon hover:text-red-500 transition-colors"></i>
+            <i class="fas fa-tv text-lg cursor-pointer sidebar-icon hover:text-red-500 transition-colors"></i>
+            <i class="fas fa-heart text-lg cursor-pointer sidebar-icon hover:text-red-500 transition-colors"></i>
+            <i class="fas fa-fire text-lg cursor-pointer sidebar-icon hover:text-red-500 transition-colors"></i>
+            <i class="fas fa-bookmark text-lg cursor-pointer sidebar-icon hover:text-red-500 transition-colors"></i>
         </div>
-
         <!-- User Avatar -->
-        <div class="mt-auto">
+        <div class="mt-auto mb-2">
             <div
-                class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-500 transition-colors">
-                <i class="fas fa-user text-sm"></i>
+                class="w-10 h-10 bg-gray-600 rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-500 transition-colors">
+                <i class="fas fa-user text-sm text-gray-300"></i>
             </div>
         </div>
     </div>
 
     <!-- Main Content -->
-    <div class="ml-16 p-6">
-        <!-- Header -->
-        <div class="mb-8">
-            <!-- Search Bar -->
-            <div class="relative mb-6">
-                <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                <input type="text" placeholder="Search for movies or TV series" id="searchInput"
-                    class="w-full max-w-md bg-gray-800 border border-gray-700 rounded-lg py-3 pl-12 pr-4 text-white placeholder-gray-400 focus:border-red-600 focus:outline-none transition-all duration-200">
-            </div>
+    <div class="ml-0 md:ml-16 p-4 md:p-6 main-content">
+        <!-- Hero Section -->
+        <div class="hero-section mb-12">
+            <!-- Hero content will be loaded dynamically -->
         </div>
-
-        <!-- Kết quả search sẽ render ở đây -->
-        <div id="searchResults"></div>
-
         <!-- Trending Section -->
-        <div class="mb-10">
-            <h2 class="text-2xl font-semibold mb-6">Trending</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Trending Item 1 -->
-                <div class="card-item cursor-pointer">
-                    <div class="trending-card-1 aspect-video rounded-lg overflow-hidden relative">
-                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                        <div class="absolute bottom-4 left-4 z-10">
-                            <div class="flex items-center space-x-2 text-sm text-gray-300 mb-1">
-                                <span>2019</span>
-                                <span>•</span>
-                                <span class="flex items-center">
-                                    <i class="fas fa-film mr-1"></i>
-                                    Movie
-                                </span>
-                                <span>•</span>
-                                <span>PG</span>
-                            </div>
-                            <h3 class="text-lg font-semibold">Beyond Earth</h3>
-                        </div>
-                        <div
-                            class="absolute top-4 right-4 bg-black bg-opacity-50 rounded-full p-2 play-btn-hidden play-btn-hover z-10">
-                            <i class="fas fa-play text-white text-sm"></i>
-                        </div>
-                        <div class="absolute top-4 left-4 bg-black bg-opacity-50 rounded px-2 py-1 bookmark-btn z-10"
-                            data-movie-id="1">
-                            <i class="fas fa-bookmark text-white text-sm"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Trending Item 2 -->
-                <div class="card-item cursor-pointer">
-                    <div class="trending-card-2 aspect-video rounded-lg overflow-hidden relative">
-                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                        <div class="absolute bottom-4 left-4 z-10">
-                            <div class="flex items-center space-x-2 text-sm text-gray-300 mb-1">
-                                <span>2021</span>
-                                <span>•</span>
-                                <span class="flex items-center">
-                                    <i class="fas fa-film mr-1"></i>
-                                    Movie
-                                </span>
-                                <span>•</span>
-                                <span>PG</span>
-                            </div>
-                            <h3 class="text-lg font-semibold">Bottom Gear</h3>
-                        </div>
-                        <div
-                            class="absolute top-4 right-4 bg-black bg-opacity-50 rounded-full p-2 play-btn-hidden play-btn-hover z-10">
-                            <i class="fas fa-play text-white text-sm"></i>
-                        </div>
-                        <div class="absolute top-4 left-4 bg-black bg-opacity-50 rounded px-2 py-1 bookmark-btn z-10"
-                            data-movie-id="2">
-                            <i class="fas fa-bookmark text-white text-sm"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Trending Item 3 -->
-                <div class="card-item cursor-pointer">
-                    <div class="trending-card-3 aspect-video rounded-lg overflow-hidden relative">
-                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                        <div class="absolute bottom-4 left-4 z-10">
-                            <div class="flex items-center space-x-2 text-sm text-gray-300 mb-1">
-                                <span>2019</span>
-                                <span>•</span>
-                                <span class="flex items-center">
-                                    <i class="fas fa-tv mr-1"></i>
-                                    TV Series
-                                </span>
-                                <span>•</span>
-                                <span>E</span>
-                            </div>
-                            <h3 class="text-lg font-semibold">Undiscovered Cities</h3>
-                        </div>
-                        <div
-                            class="absolute top-4 right-4 bg-black bg-opacity-50 rounded-full p-2 play-btn-hidden play-btn-hover z-10">
-                            <i class="fas fa-play text-white text-sm"></i>
-                        </div>
-                        <div class="absolute top-4 left-4 bg-black bg-opacity-50 rounded px-2 py-1 bookmark-btn z-10"
-                            data-movie-id="3">
-                            <i class="fas fa-bookmark text-white text-sm"></i>
-                        </div>
-                    </div>
-                </div>
+        <div class="trending-section mb-12">
+            <h2 class="text-2xl font-semibold mb-6">Trending Now</h2>
+            <div id="moviesGrid" class="movies-grid">
+                <!-- Movies will be loaded dynamically -->
             </div>
         </div>
-
         <!-- Recommended Section -->
-        <div>
-            <h2 class="text-2xl font-semibold mb-6">Recommended for you</h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                <!-- Recommended Item 1 -->
-                <div class="card-item cursor-pointer">
-                    <div class="recommended-card-1 aspect-[3/4] rounded-lg overflow-hidden relative">
-                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                        <div class="absolute bottom-3 left-3 z-10">
-                            <div class="flex items-center space-x-2 text-sm text-gray-300 mb-1">
-                                <span>2019</span>
-                                <span>•</span>
-                                <span class="flex items-center">
-                                    <i class="fas fa-film mr-1"></i>
-                                    Movie
-                                </span>
-                                <span>•</span>
-                                <span>E</span>
-                            </div>
-                            <h3 class="text-sm font-semibold">The Great Lands</h3>
-                        </div>
-                        <div
-                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 play-btn-hidden play-btn-hover z-10">
-                            <i class="fas fa-play text-white text-xs"></i>
-                        </div>
-                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1 bookmark-btn z-10"
-                            data-movie-id="4">
-                            <i class="fas fa-bookmark text-white text-xs"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recommended Item 2 -->
-                <div class="card-item cursor-pointer">
-                    <div class="recommended-card-2 aspect-[3/4] rounded-lg overflow-hidden relative">
-                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                        <div class="absolute bottom-3 left-3 z-10">
-                            <div class="flex items-center space-x-2 text-sm text-gray-300 mb-1">
-                                <span>2019</span>
-                                <span>•</span>
-                                <span class="flex items-center">
-                                    <i class="fas fa-tv mr-1"></i>
-                                    TV Series
-                                </span>
-                                <span>•</span>
-                                <span>PG</span>
-                            </div>
-                            <h3 class="text-sm font-semibold">The Diary</h3>
-                        </div>
-                        <div
-                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 play-btn-hidden play-btn-hover z-10">
-                            <i class="fas fa-play text-white text-xs"></i>
-                        </div>
-                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1 bookmark-btn z-10"
-                            data-movie-id="5">
-                            <i class="fas fa-bookmark text-white text-xs"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recommended Item 3 -->
-                <div class="card-item cursor-pointer">
-                    <div class="recommended-card-3 aspect-[3/4] rounded-lg overflow-hidden relative">
-                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                        <div class="absolute bottom-3 left-3 z-10">
-                            <div class="flex items-center space-x-2 text-sm text-gray-300 mb-1">
-                                <span>2017</span>
-                                <span>•</span>
-                                <span class="flex items-center">
-                                    <i class="fas fa-film mr-1"></i>
-                                    Movie
-                                </span>
-                                <span>•</span>
-                                <span>E</span>
-                            </div>
-                            <h3 class="text-sm font-semibold">Earth's Untouched</h3>
-                        </div>
-                        <div
-                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 play-btn-hidden play-btn-hover z-10">
-                            <i class="fas fa-play text-white text-xs"></i>
-                        </div>
-                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1 bookmark-btn z-10"
-                            data-movie-id="6">
-                            <i class="fas fa-bookmark text-white text-xs"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recommended Item 4 -->
-                <div class="card-item cursor-pointer">
-                    <div class="recommended-card-4 aspect-[3/4] rounded-lg overflow-hidden relative">
-                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                        <div class="absolute bottom-3 left-3 z-10">
-                            <div class="flex items-center space-x-2 text-sm text-gray-300 mb-1">
-                                <span>2019</span>
-                                <span>•</span>
-                                <span class="flex items-center">
-                                    <i class="fas fa-film mr-1"></i>
-                                    Movie
-                                </span>
-                                <span>•</span>
-                                <span>E</span>
-                            </div>
-                            <h3 class="text-sm font-semibold">No Land Beyond</h3>
-                        </div>
-                        <div
-                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 play-btn-hidden play-btn-hover z-10">
-                            <i class="fas fa-play text-white text-xs"></i>
-                        </div>
-                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1 bookmark-btn z-10"
-                            data-movie-id="7">
-                            <i class="fas fa-bookmark text-white text-xs"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recommended Item 5 -->
-                <div class="card-item cursor-pointer">
-                    <div class="recommended-card-5 aspect-[3/4] rounded-lg overflow-hidden relative">
-                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                        <div class="absolute bottom-3 left-3 z-10">
-                            <div class="flex items-center space-x-2 text-sm text-gray-300 mb-1">
-                                <span>2016</span>
-                                <span>•</span>
-                                <span class="flex items-center">
-                                    <i class="fas fa-tv mr-1"></i>
-                                    TV Series
-                                </span>
-                                <span>•</span>
-                                <span>PG</span>
-                            </div>
-                            <h3 class="text-sm font-semibold">During the Hunt</h3>
-                        </div>
-                        <div
-                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 play-btn-hidden play-btn-hover z-10">
-                            <i class="fas fa-play text-white text-xs"></i>
-                        </div>
-                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1 bookmark-btn z-10"
-                            data-movie-id="8">
-                            <i class="fas fa-bookmark text-white text-xs"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recommended Item 6 -->
-                <div class="card-item cursor-pointer">
-                    <div class="recommended-card-6 aspect-[3/4] rounded-lg overflow-hidden relative">
-                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                        <div class="absolute bottom-3 left-3 z-10">
-                            <div class="flex items-center space-x-2 text-sm text-gray-300 mb-1">
-                                <span>2016</span>
-                                <span>•</span>
-                                <span class="flex items-center">
-                                    <i class="fas fa-tv mr-1"></i>
-                                    TV Series
-                                </span>
-                                <span>•</span>
-                                <span>E</span>
-                            </div>
-                            <h3 class="text-sm font-semibold">Autosport the Series</h3>
-                        </div>
-                        <div
-                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 play-btn-hidden play-btn-hover z-10">
-                            <i class="fas fa-play text-white text-xs"></i>
-                        </div>
-                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1 bookmark-btn z-10"
-                            data-movie-id="9">
-                            <i class="fas fa-bookmark text-white text-xs"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recommended Item 7 -->
-                <div class="card-item cursor-pointer">
-                    <div class="recommended-card-7 aspect-[3/4] rounded-lg overflow-hidden relative">
-                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                        <div class="absolute bottom-3 left-3 z-10">
-                            <div class="flex items-center space-x-2 text-sm text-gray-300 mb-1">
-                                <span>2017</span>
-                                <span>•</span>
-                                <span class="flex items-center">
-                                    <i class="fas fa-film mr-1"></i>
-                                    Movie
-                                </span>
-                                <span>•</span>
-                                <span>E</span>
-                            </div>
-                            <h3 class="text-sm font-semibold">Same Answer II</h3>
-                        </div>
-                        <div
-                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 play-btn-hidden play-btn-hover z-10">
-                            <i class="fas fa-play text-white text-xs"></i>
-                        </div>
-                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1 bookmark-btn z-10"
-                            data-movie-id="10">
-                            <i class="fas fa-bookmark text-white text-xs"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recommended Item 8 -->
-                <div class="card-item cursor-pointer">
-                    <div class="recommended-card-8 aspect-[3/4] rounded-lg overflow-hidden relative">
-                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                        <div class="absolute bottom-3 left-3 z-10">
-                            <div class="flex items-center space-x-2 text-sm text-gray-300 mb-1">
-                                <span>2016</span>
-                                <span>•</span>
-                                <span class="flex items-center">
-                                    <i class="fas fa-tv mr-1"></i>
-                                    TV Series
-                                </span>
-                                <span>•</span>
-                                <span>PG</span>
-                            </div>
-                            <h3 class="text-sm font-semibold">Below Echo</h3>
-                        </div>
-                        <div
-                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 play-btn-hidden play-btn-hover z-10">
-                            <i class="fas fa-play text-white text-xs"></i>
-                        </div>
-                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1 bookmark-btn z-10"
-                            data-movie-id="11">
-                            <i class="fas fa-bookmark text-white text-xs"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recommended Item 9 -->
-                <div class="card-item cursor-pointer">
-                    <div class="recommended-card-9 aspect-[3/4] rounded-lg overflow-hidden relative">
-                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                        <div class="absolute bottom-3 left-3 z-10">
-                            <div class="flex items-center space-x-2 text-sm text-gray-300 mb-1">
-                                <span>2022</span>
-                                <span>•</span>
-                                <span class="flex items-center">
-                                    <i class="fas fa-film mr-1"></i>
-                                    Movie
-                                </span>
-                                <span>•</span>
-                                <span>PG</span>
-                            </div>
-                            <h3 class="text-sm font-semibold">The Hidden Forest</h3>
-                        </div>
-                        <div
-                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 play-btn-hidden play-btn-hover z-10">
-                            <i class="fas fa-play text-white text-xs"></i>
-                        </div>
-                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1 bookmark-btn z-10"
-                            data-movie-id="12">
-                            <i class="fas fa-bookmark text-white text-xs"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recommended Item 10 -->
-                <div class="card-item cursor-pointer">
-                    <div class="recommended-card-10 aspect-[3/4] rounded-lg overflow-hidden relative">
-                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                        <div class="absolute bottom-3 left-3 z-10">
-                            <div class="flex items-center space-x-2 text-sm text-gray-300 mb-1">
-                                <span>2023</span>
-                                <span>•</span>
-                                <span class="flex items-center">
-                                    <i class="fas fa-tv mr-1"></i>
-                                    TV Series
-                                </span>
-                                <span>•</span>
-                                <span>PG-13</span>
-                            </div>
-                            <h3 class="text-sm font-semibold">Cyber Revolution</h3>
-                        </div>
-                        <div
-                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 play-btn-hidden play-btn-hover z-10">
-                            <i class="fas fa-play text-white text-xs"></i>
-                        </div>
-                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1 bookmark-btn z-10"
-                            data-movie-id="13">
-                            <i class="fas fa-bookmark text-white text-xs"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recommended Item 11 -->
-                <div class="card-item cursor-pointer">
-                    <div class="recommended-card-11 aspect-[3/4] rounded-lg overflow-hidden relative">
-                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                        <div class="absolute bottom-3 left-3 z-10">
-                            <div class="flex items-center space-x-2 text-sm text-gray-300 mb-1">
-                                <span>2023</span>
-                                <span>•</span>
-                                <span class="flex items-center">
-                                    <i class="fas fa-film mr-1"></i>
-                                    Movie
-                                </span>
-                                <span>•</span>
-                                <span>E</span>
-                            </div>
-                            <h3 class="text-sm font-semibold">Ocean's Secrets</h3>
-                        </div>
-                        <div
-                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 play-btn-hidden play-btn-hover z-10">
-                            <i class="fas fa-play text-white text-xs"></i>
-                        </div>
-                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1 bookmark-btn z-10"
-                            data-movie-id="14">
-                            <i class="fas fa-bookmark text-white text-xs"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recommended Item 12 -->
-                <div class="card-item cursor-pointer">
-                    <div class="recommended-card-12 aspect-[3/4] rounded-lg overflow-hidden relative">
-                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                        <div class="absolute bottom-3 left-3 z-10">
-                            <div class="flex items-center space-x-2 text-sm text-gray-300 mb-1">
-                                <span>2023</span>
-                                <span>•</span>
-                                <span class="flex items-center">
-                                    <i class="fas fa-film mr-1"></i>
-                                    Movie
-                                </span>
-                                <span>•</span>
-                                <span>PG-13</span>
-                            </div>
-                            <h3 class="text-sm font-semibold">Interstellar Dreams</h3>
-                        </div>
-                        <div
-                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 play-btn-hidden play-btn-hover z-10">
-                            <i class="fas fa-play text-white text-xs"></i>
-                        </div>
-                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1 bookmark-btn z-10"
-                            data-movie-id="15">
-                            <i class="fas fa-bookmark text-white text-xs"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recommended Item 13 -->
-                <div class="card-item cursor-pointer">
-                    <div class="recommended-card-13 aspect-[3/4] rounded-lg overflow-hidden relative">
-                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                        <div class="absolute bottom-3 left-3 z-10">
-                            <div class="flex items-center space-x-2 text-sm text-gray-300 mb-1">
-                                <span>2023</span>
-                                <span>•</span>
-                                <span class="flex items-center">
-                                    <i class="fas fa-tv mr-1"></i>
-                                    TV Series
-                                </span>
-                                <span>•</span>
-                                <span>PG</span>
-                            </div>
-                            <h3 class="text-sm font-semibold">Ancient Mysteries</h3>
-                        </div>
-                        <div
-                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 play-btn-hidden play-btn-hover z-10">
-                            <i class="fas fa-play text-white text-xs"></i>
-                        </div>
-                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1 bookmark-btn z-10"
-                            data-movie-id="16">
-                            <i class="fas fa-bookmark text-white text-xs"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recommended Item 14 -->
-                <div class="card-item cursor-pointer">
-                    <div class="recommended-card-14 aspect-[3/4] rounded-lg overflow-hidden relative">
-                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                        <div class="absolute bottom-3 left-3 z-10">
-                            <div class="flex items-center space-x-2 text-sm text-gray-300 mb-1">
-                                <span>2023</span>
-                                <span>•</span>
-                                <span class="flex items-center">
-                                    <i class="fas fa-tv mr-1"></i>
-                                    TV Series
-                                </span>
-                                <span>•</span>
-                                <span>PG-13</span>
-                            </div>
-                            <h3 class="text-sm font-semibold">Urban Legends</h3>
-                        </div>
-                        <div
-                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 play-btn-hidden play-btn-hover z-10">
-                            <i class="fas fa-play text-white text-xs"></i>
-                        </div>
-                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1 bookmark-btn z-10"
-                            data-movie-id="17">
-                            <i class="fas fa-bookmark text-white text-xs"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recommended Item 15 -->
-                <div class="card-item cursor-pointer">
-                    <div class="recommended-card-15 aspect-[3/4] rounded-lg overflow-hidden relative">
-                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                        <div class="absolute bottom-3 left-3 z-10">
-                            <div class="flex items-center space-x-2 text-sm text-gray-300 mb-1">
-                                <span>2023</span>
-                                <span>•</span>
-                                <span class="flex items-center">
-                                    <i class="fas fa-film mr-1"></i>
-                                    Movie
-                                </span>
-                                <span>•</span>
-                                <span>PG-13</span>
-                            </div>
-                            <h3 class="text-sm font-semibold">Digital Frontier</h3>
-                        </div>
-                        <div
-                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 play-btn-hidden play-btn-hover z-10">
-                            <i class="fas fa-play text-white text-xs"></i>
-                        </div>
-                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1 bookmark-btn z-10"
-                            data-movie-id="18">
-                            <i class="fas fa-bookmark text-white text-xs"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recommended Item 16 -->
-                <div class="card-item cursor-pointer">
-                    <div class="recommended-card-16 aspect-[3/4] rounded-lg overflow-hidden relative">
-                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                        <div class="absolute bottom-3 left-3 z-10">
-                            <div class="flex items-center space-x-2 text-sm text-gray-300 mb-1">
-                                <span>2023</span>
-                                <span>•</span>
-                                <span class="flex items-center">
-                                    <i class="fas fa-film mr-1"></i>
-                                    Movie
-                                </span>
-                                <span>•</span>
-                                <span>E</span>
-                            </div>
-                            <h3 class="text-sm font-semibold">Wild Symphony</h3>
-                        </div>
-                        <div
-                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 play-btn-hidden play-btn-hover z-10">
-                            <i class="fas fa-play text-white text-xs"></i>
-                        </div>
-                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1 bookmark-btn z-10"
-                            data-movie-id="19">
-                            <i class="fas fa-bookmark text-white text-xs"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recommended Item 17 -->
-                <div class="card-item cursor-pointer">
-                    <div class="recommended-card-17 aspect-[3/4] rounded-lg overflow-hidden relative">
-                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                        <div class="absolute bottom-3 left-3 z-10">
-                            <div class="flex items-center space-x-2 text-sm text-gray-300 mb-1">
-                                <span>2023</span>
-                                <span>•</span>
-                                <span class="flex items-center">
-                                    <i class="fas fa-tv mr-1"></i>
-                                    TV Series
-                                </span>
-                                <span>•</span>
-                                <span>PG</span>
-                            </div>
-                            <h3 class="text-sm font-semibold">Future Foods</h3>
-                        </div>
-                        <div
-                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 play-btn-hidden play-btn-hover z-10">
-                            <i class="fas fa-play text-white text-xs"></i>
-                        </div>
-                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1 bookmark-btn z-10"
-                            data-movie-id="20">
-                            <i class="fas fa-bookmark text-white text-xs"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recommended Item 18 -->
-                <div class="card-item cursor-pointer">
-                    <div class="recommended-card-18 aspect-[3/4] rounded-lg overflow-hidden relative">
-                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                        <div class="absolute bottom-3 left-3 z-10">
-                            <div class="flex items-center space-x-2 text-sm text-gray-300 mb-1">
-                                <span>2023</span>
-                                <span>•</span>
-                                <span class="flex items-center">
-                                    <i class="fas fa-film mr-1"></i>
-                                    Movie
-                                </span>
-                                <span>•</span>
-                                <span>PG</span>
-                            </div>
-                            <h3 class="text-sm font-semibold">Ocean's Secrets</h3>
-                        </div>
-                        <div
-                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 play-btn-hidden play-btn-hover z-10">
-                            <i class="fas fa-play text-white text-xs"></i>
-                        </div>
-                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1 bookmark-btn z-10"
-                            data-movie-id="21">
-                            <i class="fas fa-bookmark text-white text-xs"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recommended Item 19 -->
-                <div class="card-item cursor-pointer">
-                    <div class="recommended-card-19 aspect-[3/4] rounded-lg overflow-hidden relative">
-                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                        <div class="absolute bottom-3 left-3 z-10">
-                            <div class="flex items-center space-x-2 text-sm text-gray-300 mb-1">
-                                <span>2023</span>
-                                <span>•</span>
-                                <span class="flex items-center">
-                                    <i class="fas fa-tv mr-1"></i>
-                                    TV Series
-                                </span>
-                                <span>•</span>
-                                <span>PG-13</span>
-                            </div>
-                            <h3 class="text-sm font-semibold">Cyber Warriors</h3>
-                        </div>
-                        <div
-                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 play-btn-hidden play-btn-hover z-10">
-                            <i class="fas fa-play text-white text-xs"></i>
-                        </div>
-                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1 bookmark-btn z-10"
-                            data-movie-id="22">
-                            <i class="fas fa-bookmark text-white text-xs"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recommended Item 20 -->
-                <div class="card-item cursor-pointer">
-                    <div class="recommended-card-20 aspect-[3/4] rounded-lg overflow-hidden relative">
-                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                        <div class="absolute bottom-3 left-3 z-10">
-                            <div class="flex items-center space-x-2 text-sm text-gray-300 mb-1">
-                                <span>2023</span>
-                                <span>•</span>
-                                <span class="flex items-center">
-                                    <i class="fas fa-film mr-1"></i>
-                                    Documentary
-                                </span>
-                                <span>•</span>
-                                <span>PG</span>
-                            </div>
-                            <h3 class="text-sm font-semibold">Ocean's Secrets</h3>
-                        </div>
-                        <div
-                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 opacity-0 hover:opacity-100 transition-opacity z-10">
-                            <i class="fas fa-play text-white text-xs"></i>
-                        </div>
-                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1 bookmark-btn z-10"
-                            data-movie-id="23">
-                            <i class="fas fa-bookmark text-white text-xs"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recommended Item 21 -->
-                <div class="card-item cursor-pointer">
-                    <div class="recommended-card-21 aspect-[3/4] rounded-lg overflow-hidden relative">
-                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                        <div class="absolute bottom-3 left-3 z-10">
-                            <div class="flex items-center space-x-2 text-sm text-gray-300 mb-1">
-                                <span>2023</span>
-                                <span>•</span>
-                                <span class="flex items-center">
-                                    <i class="fas fa-tv mr-1"></i>
-                                    TV Series
-                                </span>
-                                <span>•</span>
-                                <span>PG-13</span>
-                            </div>
-                            <h3 class="text-sm font-semibold">Cyber Warriors</h3>
-                        </div>
-                        <div
-                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 opacity-0 hover:opacity-100 transition-opacity z-10">
-                            <i class="fas fa-play text-white text-xs"></i>
-                        </div>
-                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1 bookmark-btn z-10"
-                            data-movie-id="24">
-                            <i class="fas fa-bookmark text-white text-xs"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recommended Item 22 -->
-                <div class="card-item cursor-pointer">
-                    <div class="recommended-card-22 aspect-[3/4] rounded-lg overflow-hidden relative">
-                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                        <div class="absolute bottom-3 left-3 z-10">
-                            <div class="flex items-center space-x-2 text-sm text-gray-300 mb-1">
-                                <span>2023</span>
-                                <span>•</span>
-                                <span class="flex items-center">
-                                    <i class="fas fa-tv mr-1"></i>
-                                    TV Series
-                                </span>
-                                <span>•</span>
-                                <span>PG</span>
-                            </div>
-                            <h3 class="text-sm font-semibold">Street Flavors</h3>
-                        </div>
-                        <div
-                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 opacity-0 hover:opacity-100 transition-opacity z-10">
-                            <i class="fas fa-play text-white text-xs"></i>
-                        </div>
-                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1 bookmark-btn z-10"
-                            data-movie-id="25">
-                            <i class="fas fa-bookmark text-white text-xs"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recommended Item 23 -->
-                <div class="card-item cursor-pointer">
-                    <div class="recommended-card-23 aspect-[3/4] rounded-lg overflow-hidden relative">
-                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                        <div class="absolute bottom-3 left-3 z-10">
-                            <div class="flex items-center space-x-2 text-sm text-gray-300 mb-1">
-                                <span>2023</span>
-                                <span>•</span>
-                                <span class="flex items-center">
-                                    <i class="fas fa-film mr-1"></i>
-                                    Movie
-                                </span>
-                                <span>•</span>
-                                <span>PG-13</span>
-                            </div>
-                            <h3 class="text-sm font-semibold">Quantum Minds</h3>
-                        </div>
-                        <div
-                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 play-btn-hidden play-btn-hover z-10">
-                            <i class="fas fa-play text-white text-xs"></i>
-                        </div>
-                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1 bookmark-btn z-10"
-                            data-movie-id="26">
-                            <i class="fas fa-bookmark text-white text-xs"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recommended Item 24 -->
-                <div class="card-item cursor-pointer">
-                    <div class="recommended-card-24 aspect-[3/4] rounded-lg overflow-hidden relative">
-                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                        <div class="absolute bottom-3 left-3 z-10">
-                            <div class="flex items-center space-x-2 text-sm text-gray-300 mb-1">
-                                <span>2023</span>
-                                <span>•</span>
-                                <span class="flex items-center">
-                                    <i class="fas fa-film mr-1"></i>
-                                    Movie
-                                </span>
-                                <span>•</span>
-                                <span>PG-13</span>
-                            </div>
-                            <h3 class="text-sm font-semibold">Quantum Minds</h3>
-                        </div>
-                        <div
-                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 play-btn-hidden play-btn-hover z-10">
-                            <i class="fas fa-play text-white text-xs"></i>
-                        </div>
-                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1 bookmark-btn z-10"
-                            data-movie-id="27">
-                            <i class="fas fa-bookmark text-white text-xs"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recommended Item 25 -->
-                <div class="card-item cursor-pointer">
-                    <div class="recommended-card-25 aspect-[3/4] rounded-lg overflow-hidden relative">
-                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                        <div class="absolute bottom-3 left-3 z-10">
-                            <div class="flex items-center space-x-2 text-sm text-gray-300 mb-1">
-                                <span>2023</span>
-                                <span>•</span>
-                                <span class="flex items-center">
-                                    <i class="fas fa-film mr-1"></i>
-                                    Movie
-                                </span>
-                                <span>•</span>
-                                <span>PG-13</span>
-                            </div>
-                            <h3 class="text-sm font-semibold">Quantum Minds</h3>
-                        </div>
-                        <div
-                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 play-btn-hidden play-btn-hover z-10">
-                            <i class="fas fa-play text-white text-xs"></i>
-                        </div>
-                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1 bookmark-btn z-10"
-                            data-movie-id="28">
-                            <i class="fas fa-bookmark text-white text-xs"></i>
-                        </div>
-                    </div>
-                </div>
-                <!-- Recommended Item 26 -->
-                <div class="card-item cursor-pointer">
-                    <div class="recommended-card-26 aspect-[3/4] rounded-lg overflow-hidden relative">
-                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                        <div class="absolute bottom-3 left-3 z-10">
-                            <div class="flex items-center space-x-2 text-sm text-gray-300 mb-1">
-                                <span>2023</span>
-                                <span>•</span>
-                                <span class="flex items-center">
-                                    <i class="fas fa-film mr-1"></i>
-                                    Movie
-                                </span>
-                                <span>•</span>
-                                <span>PG-13</span>
-                            </div>
-                            <h3 class="text-sm font-semibold">Quantum Minds</h3>
-                        </div>
-                        <div
-                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 play-btn-hidden play-btn-hover z-10">
-                            <i class="fas fa-play text-white text-xs"></i>
-                        </div>
-                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1 bookmark-btn z-10"
-                            data-movie-id="29">
-                            <i class="fas fa-bookmark text-white text-xs"></i>
-                        </div>
-                    </div>
-                </div>
-                <!-- Recommended Item 27 -->
-                <div class="card-item cursor-pointer">
-                    <div class="recommended-card-27 aspect-[3/4] rounded-lg overflow-hidden relative">
-                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                        <div class="absolute bottom-3 left-3 z-10">
-                            <div class="flex items-center space-x-2 text-sm text-gray-300 mb-1">
-                                <span>2023</span>
-                                <span>•</span>
-                                <span class="flex items-center">
-                                    <i class="fas fa-film mr-1"></i>
-                                    Movie
-                                </span>
-                                <span>•</span>
-                                <span>PG-13</span>
-                            </div>
-                            <h3 class="text-sm font-semibold">Quantum Minds</h3>
-                        </div>
-                        <div
-                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 play-btn-hidden play-btn-hover z-10">
-                            <i class="fas fa-play text-white text-xs"></i>
-                        </div>
-                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1 bookmark-btn z-10"
-                            data-movie-id="30">
-                            <i class="fas fa-bookmark text-white text-xs"></i>
-                        </div>
-                    </div>
-                </div>
-                <!-- Recommended Item 28 -->
-                <div class="card-item cursor-pointer">
-                    <div class="recommended-card-28 aspect-[3/4] rounded-lg overflow-hidden relative">
-                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                        <div class="absolute bottom-3 left-3 z-10">
-                            <div class="flex items-center space-x-2 text-sm text-gray-300 mb-1">
-                                <span>2023</span>
-                                <span>•</span>
-                                <span class="flex items-center">
-                                    <i class="fas fa-film mr-1"></i>
-                                    Movie
-                                </span>
-                                <span>•</span>
-                                <span>PG-13</span>
-                            </div>
-                            <h3 class="text-sm font-semibold">Quantum Minds</h3>
-                        </div>
-                        <div
-                            class="absolute top-3 right-3 bg-black bg-opacity-50 rounded-full p-1.5 play-btn-hidden play-btn-hover z-10">
-                            <i class="fas fa-play text-white text-xs"></i>
-                        </div>
-                        <div class="absolute top-3 left-3 bg-black bg-opacity-50 rounded px-2 py-1 bookmark-btn z-10"
-                            data-movie-id="31">
-                            <i class="fas fa-bookmark text-white text-xs"></i>
-                        </div>
-                    </div>
-                </div>
+        <div class="recommended-section mb-12">
+            <h2 class="text-2xl font-semibold mb-6">Recommended for You</h2>
+            <div class="movies-grid">
+                <!-- Recommended movies will be loaded dynamically -->
             </div>
+        </div>
+        <!-- Categories Section -->
+        <div class="categories-section">
+            <!-- Categories will be loaded dynamically -->
         </div>
     </div>
-
     <!-- Movie Details Modal -->
-    <div id="movieModal" class="fixed inset-0 bg-black bg-opacity-75 hidden items-center justify-center z-50">
-        <div class="bg-gray-800 rounded-lg p-6 max-w-4xl w-full mx-4 relative">
-            <button id="closeModal" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+    <div id="movieModal" class="fixed inset-0 bg-black bg-opacity-80 hidden items-center justify-center z-50 p-4">
+        <div class="bg-gray-800 rounded-lg p-6 max-w-4xl w-full mx-auto relative max-h-[90vh] overflow-y-auto">
+            <button id="closeModal"
+                class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors z-10">
                 <i class="fas fa-times text-xl"></i>
             </button>
-            <h2 id="modalTitle" class="text-2xl font-semibold mb-4"></h2>
-            <div id="modalContent" class="overflow-y-auto max-h-[70vh]"></div>
+            <div id="modalContent"></div>
         </div>
     </div>
-    <!-- Backtotop -->
-    <a href="" class="backtotop cd-top text-replace js-cd-top">
-        <i class="fa-solid fa-up-long"></i>
-    </a>
-
-
-
-    <script type="module" src="js/data.js"></script>
-    <script type="module" src="js/main.js"></script>
-    <!-- backtotop -->
-    <script src="./libs/backtotop/util.js"></script>
-    <script src="./libs/backtotop/main.js"></script>
 </body>
 
 </html>

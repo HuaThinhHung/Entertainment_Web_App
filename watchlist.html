@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watchlist & History - Entertainment Web App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="bg-gray-900 text-white min-h-screen">
+    <!-- Header -->
+    <header class="bg-gray-800 shadow-lg">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="text-2xl font-bold text-red-500">
+                        <i class="fas fa-film mr-2"></i>NETFLIX
+                    </a>
+                </div>
+                <nav class="hidden md:flex space-x-6">
+                    <a href="index.html" class="hover:text-red-500 transition-colors">Home</a>
+                    <a href="about.html" class="hover:text-red-500 transition-colors">About</a>
+                    <a href="contact.html" class="hover:text-red-500 transition-colors">Contact</a>
+                    <a href="watchlist.html" class="hover:text-red-500 transition-colors"">Watchlist</a>
+                </nav>
+                <button id=" toggleThemeBtn" class="bg-gray-700 hover:bg-gray-600 p-2 rounded-lg transition-colors">
+                        <i id="themeIcon" class="fas fa-moon"></i>
+                        </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Hero Section -->
+        <section class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">My Watchlist & History</h1>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                Track your movie and TV show journey - from planning to watch to completed favorites.
+            </p>
+        </section>
+
+        <!-- Statistics -->
+        <section class="mb-8">
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="bg-gray-800 p-6 rounded-lg text-center">
+                    <div class="text-3xl font-bold text-red-500 mb-2" id="totalWatchlist">0</div>
+                    <div class="text-gray-300">Total Watchlist</div>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg text-center">
+                    <div class="text-3xl font-bold text-yellow-500 mb-2" id="planToWatch">0</div>
+                    <div class="text-gray-300">Plan to Watch</div>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg text-center">
+                    <div class="text-3xl font-bold text-blue-500 mb-2" id="watching">0</div>
+                    <div class="text-gray-300">Currently Watching</div>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg text-center">
+                    <div class="text-3xl font-bold text-green-500 mb-2" id="totalWatched">0</div>
+                    <div class="text-gray-300">Total Watched</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tabs -->
+        <section class="mb-8">
+            <div class="border-b border-gray-700">
+                <nav class="flex space-x-8">
+                    <button id="watchlistTab"
+                        class="tab-btn active py-4 px-1 border-b-2 border-red-500 text-red-500 font-medium">
+                        <i class="fas fa-clock mr-2"></i>Watchlist
+                    </button>
+                    <button id="historyTab"
+                        class="tab-btn py-4 px-1 border-b-2 border-transparent text-gray-300 hover:text-white font-medium">
+                        <i class="fas fa-history mr-2"></i>History
+                    </button>
+                </nav>
+            </div>
+        </section>
+
+        <!-- Watchlist Content -->
+        <section id="watchlistContent" class="space-y-6">
+            <!-- Filter and Sort -->
+            <div class="flex flex-wrap gap-4 items-center">
+                <select id="watchlistStatusFilter"
+                    class="bg-gray-800 border border-gray-700 rounded-lg py-2 px-4 text-white">
+                    <option value="">All Status</option>
+                    <option value="plan_to_watch">Plan to Watch</option>
+                    <option value="watching">Watching</option>
+                    <option value="watched">Watched</option>
+                </select>
+                <select id="watchlistCategoryFilter"
+                    class="bg-gray-800 border border-gray-700 rounded-lg py-2 px-4 text-white">
+                    <option value="">All Categories</option>
+                    <option value="Movie">Movies</option>
+                    <option value="TV Series">TV Series</option>
+                </select>
+                <select id="watchlistSortBy" class="bg-gray-800 border border-gray-700 rounded-lg py-2 px-4 text-white">
+                    <option value="added-desc">Recently Added</option>
+                    <option value="added-asc">Oldest Added</option>
+                    <option value="title-asc">Title A-Z</option>
+                    <option value="title-desc">Title Z-A</option>
+                    <option value="year-desc">Year Newest</option>
+                    <option value="year-asc">Year Oldest</option>
+                </select>
+                <span id="watchlistCount" class="text-gray-300 text-sm"></span>
+            </div>
+
+            <!-- Watchlist Grid -->
+            <div id="watchlistGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Watchlist items will be loaded here -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="watchlistEmpty" class="text-center py-12 hidden">
+                <i class="fas fa-clock text-6xl text-gray-600 mb-4"></i>
+                <h3 class="text-xl font-semibold mb-2">Your watchlist is empty</h3>
+                <p class="text-gray-400 mb-6">Start adding movies and TV shows to your watchlist!</p>
+                <a href="index.html"
+                    class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+                    Browse Movies
+                </a>
+            </div>
+        </section>
+
+        <!-- History Content -->
+        <section id="historyContent" class="space-y-6 hidden">
+            <!-- Filter and Sort -->
+            <div class="flex flex-wrap gap-4 items-center">
+                <select id="historyCategoryFilter"
+                    class="bg-gray-800 border border-gray-700 rounded-lg py-2 px-4 text-white">
+                    <option value="">All Categories</option>
+                    <option value="Movie">Movies</option>
+                    <option value="TV Series">TV Series</option>
+                </select>
+                <select id="historySortBy" class="bg-gray-800 border border-gray-700 rounded-lg py-2 px-4 text-white">
+                    <option value="watched-desc">Recently Watched</option>
+                    <option value="watched-asc">Oldest Watched</option>
+                    <option value="title-asc">Title A-Z</option>
+                    <option value="title-desc">Title Z-A</option>
+                    <option value="year-desc">Year Newest</option>
+                    <option value="year-asc">Year Oldest</option>
+                </select>
+                <span id="historyCount" class="text-gray-300 text-sm"></span>
+            </div>
+
+            <!-- History Grid -->
+            <div id="historyGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- History items will be loaded here -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="historyEmpty" class="text-center py-12 hidden">
+                <i class="fas fa-history text-6xl text-gray-600 mb-4"></i>
+                <h3 class="text-xl font-semibold mb-2">No watch history yet</h3>
+                <p class="text-gray-400 mb-6">Start watching movies and TV shows to build your history!</p>
+                <a href="index.html"
+                    class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+                    Browse Movies
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 mt-16">
+        <div class="container mx-auto px-4 py-8">
+            <div class="text-center">
+                <p class="text-gray-300">&copy; 2024 Entertainment Web App. All rights reserved.</p>
+                <div class="mt-4 space-x-4">
+                    <a href="index.html" class="text-gray-300 hover:text-red-500 transition-colors">Home</a>
+                    <a href="about.html" class="text-gray-300 hover:text-red-500 transition-colors">About</a>
+                    <a href="contact.html" class="text-gray-300 hover:text-red-500 transition-colors">Contact</a>
+                    <a href="watchlist.html" class="text-red-500">Watchlist</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/utils.js"></script>
+    <script src="js/watchlist.js"></script>
+    <script>
+        // Theme toggle functionality
+        const themeBtn = document.getElementById('toggleThemeBtn');
+        const themeIcon = document.getElementById('themeIcon');
+
+        function setTheme(mode) {
+            if (mode === 'light') {
+                document.body.classList.add('light-mode');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.body.classList.remove('light-mode');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Load theme on page load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') setTheme('light');
+        else setTheme('dark');
+
+        if (themeBtn) {
+            themeBtn.onclick = () => {
+                if (document.body.classList.contains('light-mode')) setTheme('dark');
+                else setTheme('light');
+            };
+        }
+
+        // Tab functionality
+        const watchlistTab = document.getElementById('watchlistTab');
+        const historyTab = document.getElementById('historyTab');
+        const watchlistContent = document.getElementById('watchlistContent');
+        const historyContent = document.getElementById('historyContent');
+
+        function showTab(tabName) {
+            if (tabName === 'watchlist') {
+                watchlistTab.classList.add('active', 'border-red-500', 'text-red-500');
+                watchlistTab.classList.remove('border-transparent', 'text-gray-300');
+                historyTab.classList.remove('active', 'border-red-500', 'text-red-500');
+                historyTab.classList.add('border-transparent', 'text-gray-300');
+                watchlistContent.classList.remove('hidden');
+                historyContent.classList.add('hidden');
+                loadWatchlist();
+            } else {
+                historyTab.classList.add('active', 'border-red-500', 'text-red-500');
+                historyTab.classList.remove('border-transparent', 'text-gray-300');
+                watchlistTab.classList.remove('active', 'border-red-500', 'text-red-500');
+                watchlistTab.classList.add('border-transparent', 'text-gray-300');
+                historyContent.classList.remove('hidden');
+                watchlistContent.classList.add('hidden');
+                loadHistory();
+            }
+        }
+
+        watchlistTab.addEventListener('click', () => showTab('watchlist'));
+        historyTab.addEventListener('click', () => showTab('history'));
+
+        // Load watchlist data
+        function loadWatchlist() {
+            const watchlist = watchlistSystem.getWatchlist();
+            const grid = document.getElementById('watchlistGrid');
+            const empty = document.getElementById('watchlistEmpty');
+            const count = document.getElementById('watchlistCount');
+
+            if (watchlist.length === 0) {
+                grid.classList.add('hidden');
+                empty.classList.remove('hidden');
+                count.textContent = '0 items';
+            } else {
+                grid.classList.remove('hidden');
+                empty.classList.add('hidden');
+                count.textContent = `${watchlist.length} items`;
+
+                grid.innerHTML = '';
+                watchlist.forEach(movie => {
+                    const card = watchlistSystem.createWatchlistCard(movie);
+                    grid.appendChild(card);
+                });
+            }
+        }
+
+        // Load history data
+        function loadHistory() {
+            const history = watchlistSystem.getHistory();
+            const grid = document.getElementById('historyGrid');
+            const empty = document.getElementById('historyEmpty');
+            const count = document.getElementById('historyCount');
+
+            if (history.length === 0) {
+                grid.classList.add('hidden');
+                empty.classList.remove('hidden');
+                count.textContent = '0 items';
+            } else {
+                grid.classList.remove('hidden');
+                empty.classList.add('hidden');
+                count.textContent = `${history.length} items`;
+
+                grid.innerHTML = '';
+                history.forEach(movie => {
+                    const card = watchlistSystem.createHistoryCard(movie);
+                    grid.appendChild(card);
+                });
+            }
+        }
+
+        // Update statistics
+        function updateStats() {
+            const stats = watchlistSystem.getStats();
+            document.getElementById('totalWatchlist').textContent = stats.watchlist.total;
+            document.getElementById('planToWatch').textContent = stats.watchlist.plan_to_watch;
+            document.getElementById('watching').textContent = stats.watchlist.watching;
+            document.getElementById('totalWatched').textContent = stats.history.total;
+        }
+
+        // Filter and sort functionality
+        function setupFilters() {
+            // Watchlist filters
+            const statusFilter = document.getElementById('watchlistStatusFilter');
+            const categoryFilter = document.getElementById('watchlistCategoryFilter');
+            const sortBy = document.getElementById('watchlistSortBy');
+
+            [statusFilter, categoryFilter, sortBy].forEach(filter => {
+                filter.addEventListener('change', filterWatchlist);
+            });
+
+            // History filters
+            const historyCategoryFilter = document.getElementById('historyCategoryFilter');
+            const historySortBy = document.getElementById('historySortBy');
+
+            [historyCategoryFilter, historySortBy].forEach(filter => {
+                filter.addEventListener('change', filterHistory);
+            });
+        }
+
+        function filterWatchlist() {
+            const status = document.getElementById('watchlistStatusFilter').value;
+            const category = document.getElementById('watchlistCategoryFilter').value;
+            const sortBy = document.getElementById('watchlistSortBy').value;
+
+            let filtered = watchlistSystem.getWatchlist(status);
+
+            if (category) {
+                filtered = filtered.filter(movie => movie.category === category);
+            }
+
+            // Sort
+            switch (sortBy) {
+                case 'added-desc':
+                    filtered.sort((a, b) => new Date(b.addedAt) - new Date(a.addedAt));
+                    break;
+                case 'added-asc':
+                    filtered.sort((a, b) => new Date(a.addedAt) - new Date(b.addedAt));
+                    break;
+                case 'title-asc':
+                    filtered.sort((a, b) => a.title.localeCompare(b.title));
+                    break;
+                case 'title-desc':
+                    filtered.sort((a, b) => b.title.localeCompare(a.title));
+                    break;
+                case 'year-desc':
+                    filtered.sort((a, b) => b.year - a.year);
+                    break;
+                case 'year-asc':
+                    filtered.sort((a, b) => a.year - b.year);
+                    break;
+            }
+
+            displayFilteredWatchlist(filtered);
+        }
+
+        function filterHistory() {
+            const category = document.getElementById('historyCategoryFilter').value;
+            const sortBy = document.getElementById('historySortBy').value;
+
+            let filtered = watchlistSystem.getHistory();
+
+            if (category) {
+                filtered = filtered.filter(movie => movie.category === category);
+            }
+
+            // Sort
+            switch (sortBy) {
+                case 'watched-desc':
+                    filtered.sort((a, b) => new Date(b.watchedAt) - new Date(a.watchedAt));
+                    break;
+                case 'watched-asc':
+                    filtered.sort((a, b) => new Date(a.watchedAt) - new Date(b.watchedAt));
+                    break;
+                case 'title-asc':
+                    filtered.sort((a, b) => a.title.localeCompare(b.title));
+                    break;
+                case 'title-desc':
+                    filtered.sort((a, b) => b.title.localeCompare(a.title));
+                    break;
+                case 'year-desc':
+                    filtered.sort((a, b) => b.year - a.year);
+                    break;
+                case 'year-asc':
+                    filtered.sort((a, b) => a.year - b.year);
+                    break;
+            }
+
+            displayFilteredHistory(filtered);
+        }
+
+        function displayFilteredWatchlist(movies) {
+            const grid = document.getElementById('watchlistGrid');
+            const count = document.getElementById('watchlistCount');
+
+            count.textContent = `${movies.length} items`;
+
+            grid.innerHTML = '';
+            movies.forEach(movie => {
+                const card = watchlistSystem.createWatchlistCard(movie);
+                grid.appendChild(card);
+            });
+        }
+
+        function displayFilteredHistory(movies) {
+            const grid = document.getElementById('historyGrid');
+            const count = document.getElementById('historyCount');
+
+            count.textContent = `${movies.length} items`;
+
+            grid.innerHTML = '';
+            movies.forEach(movie => {
+                const card = watchlistSystem.createHistoryCard(movie);
+                grid.appendChild(card);
+            });
+        }
+
+        // Listen for movie detail events
+        document.addEventListener('showMovieDetails', (e) => {
+            // Redirect to main page with movie details
+            window.location.href = `index.html?movie=${e.detail.id}`;
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            updateStats();
+            setupFilters();
+            loadWatchlist();
+        });
+    </script>
+</body>
+
+</html>
