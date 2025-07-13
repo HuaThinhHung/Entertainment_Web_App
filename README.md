@@ -70,7 +70,7 @@ git clone https://github.com/HuaThinhHung/Entertainment_Web_App.git
 
 # Bước 2: Mở file index.html bằng trình duyệt
 # Hoặc triển khai trên GitHub Pages, Vercel, Netlify,...
-
+````
 🌐 Trải Nghiệm Thực Tế
 🔗 Link xem demo:
 👉 https://entertainment-web-app-blush.vercel.app/index.html
