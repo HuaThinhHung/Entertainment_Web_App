@@ -25,7 +25,8 @@
     </div>
 
     <!-- Main Navbar/Header -->
-    <header class="w-full px-4 md:px-8 py-4 flex items-center justify-between bg-transparent z-40 relative">
+    <header
+        class="w-full px-4 md:px-8 py-4 flex items-center justify-between bg-transparent z-40 fixed top-0 left-0 right-0">
         <div class="flex items-center gap-6 w-full max-w-7xl mx-auto">
             <!-- Logo -->
             <a href="index.html"
@@ -159,7 +160,7 @@
     </div>
 
     <!-- Main Content -->
-    <div class="ml-0 md:ml-16 p-4 md:p-6 main-content">
+    <div class="ml-0 md:ml-16 p-4 md:p-6 main-content" style="padding-top: 80px;">
         <!-- Hero Section -->
         <div class="hero-section mb-12">
             <!-- Hero content will be loaded dynamically -->
@@ -193,6 +194,63 @@
             <div id="modalContent"></div>
         </div>
     </div>
+    <!-- Footer -->
+    <footer class="mt-16">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-sm">
+                <!-- Logo & Slogan -->
+                <div class="footer-col">
+                    <div class="footer-logo">NETFLIX</div>
+                    <div class="footer-slogan">Your gateway to unlimited entertainment</div>
+                    <p class="footer-desc">Unlimited TV shows, movies, and more. Watch anywhere. Cancel anytime.</p>
+                </div>
+                <!-- Info -->
+                <div class="footer-col">
+                    <h3>Info</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="footer-link">FAQ</a></li>
+                        <li><a href="#" class="footer-link">Help Center</a></li>
+                        <li><a href="#" class="footer-link">Account</a></li>
+                        <li><a href="#" class="footer-link">Privacy</a></li>
+                    </ul>
+                </div>
+                <!-- Quick Links -->
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="footer-link">Home</a></li>
+                        <li><a href="about.html" class="footer-link">About</a></li>
+                        <li><a href="contact.html" class="footer-link">Contact</a></li>
+                        <li><a href="watchlist.html" class="footer-link">Watchlist</a></li>
+                    </ul>
+                </div>
+                <!-- Social -->
+                <div class="footer-col">
+                    <h3>Follow Us</h3>
+                    <div class="footer-social">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-6 border-gray-700" />
+            <p class="text-center text-sm footer-copyright">&copy; 2024 Netflix Clone. All rights reserved.</p>
+        </div>
+    </footer>
+    <!-- Footer JavaScript -->
+    <script>
+        // Highlight current page link
+        const currentPage = location.pathname.split("/").pop() || 'index.html';
+        document.querySelectorAll('.footer-link').forEach(link => {
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('text-red-500', 'font-semibold');
+            }
+        });
+    </script>
+    <script src="js/scroll-handler.js"></script>
+
 </body>
 
 </html>

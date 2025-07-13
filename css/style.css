@@ -868,3 +868,284 @@ body {
     display: none !important;
   }
 }
+/* =============================================================================
+   FOOTER STYLES (MODERN, THEME-AWARE, BEAUTIFUL)
+   ============================================================================= */
+   footer {
+    background: linear-gradient(120deg, var(--bg-primary) 80%, var(--bg-tertiary) 100%);
+    color: var(--text-secondary);
+    border-top: 1.5px solid var(--border-color);
+    border-radius: 18px 18px 0 0;
+    box-shadow: 0 -2px 24px 0 var(--shadow-color);
+    margin-top: 4rem;
+    animation: fadeInFooter 1s ease;
+}
+@keyframes fadeInFooter {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+footer .footer-logo {
+    font-size: 2.2rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 8px rgba(229,9,20,0.12);
+}
+footer .footer-slogan {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    font-style: italic;
+}
+footer h3 {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 1rem;
+}
+footer ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+footer .footer-link {
+    color: var(--text-secondary);
+    position: relative;
+    font-weight: 500;
+    padding-bottom: 2px;
+    transition: color 0.2s;
+}
+footer .footer-link::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: -2px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-color), var(--accent-hover));
+    width: 0;
+    transition: width 0.3s cubic-bezier(.4,0,.2,1);
+    border-radius: 2px;
+}
+footer .footer-link:hover,
+footer .footer-link.text-red-500 {
+    color: var(--accent-color) !important;
+}
+footer .footer-link:hover::after,
+footer .footer-link.text-red-500::after {
+    width: 100%;
+}
+footer .footer-desc, footer .footer-copyright {
+    color: var(--text-muted);
+    font-size: 0.97rem;
+    margin-top: 0.5rem;
+}
+footer .footer-copyright {
+    margin-top: 2rem;
+    font-size: 0.93rem;
+    letter-spacing: 0.5px;
+}
+footer .footer-social {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+footer .footer-social a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: var(--bg-tertiary);
+    color: var(--text-muted);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    font-size: 1.25rem;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+    position: relative;
+}
+footer .footer-social a:hover {
+    background: var(--accent-color);
+    color: #fff;
+    transform: translateY(-3px) scale(1.08);
+    box-shadow: 0 4px 16px rgba(229,9,20,0.13);
+    z-index: 2;
+}
+footer .footer-social a[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: -2.2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    padding: 2px 10px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    opacity: 0.95;
+    pointer-events: none;
+}
+footer .footer-col {
+    margin-bottom: 2rem;
+}
+@media (min-width: 768px) {
+    footer .footer-col {
+        margin-bottom: 0;
+    }
+}
+@media (max-width: 900px) {
+    footer .grid {
+        gap: 2.5rem;
+    }
+}
+@media (max-width: 640px) {
+    footer .grid {
+        grid-template-columns: 1fr !important;
+    }
+    footer {
+        border-radius: 12px 12px 0 0;
+        padding-bottom: 2.5rem;
+    }
+    footer .footer-social {
+        justify-content: flex-start;
+    }
+}
+
+/* =============================================================================
+   BACK TO TOP BUTTON
+   ============================================================================= */
+
+#backToTopBtn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(229, 9, 20, 0.3);
+}
+
+#backToTopBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(229, 9, 20, 0.4);
+}
+
+#backToTopBtn:active {
+    transform: translateY(0);
+}
+
+/* =============================================================================
+   FIXED HEADER
+   ============================================================================= */
+
+header {
+    background: var(--bg-primary) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+header .bg-gray-800 {
+    background: transparent !important;
+}
+
+/* Ensure header is always on top */
+header {
+    z-index: 40;
+}
+
+
+
+/* =============================================================================
+   RESPONSIVE BACK TO TOP BUTTON
+   ============================================================================= */
+
+@media (max-width: 768px) {
+    #backToTopBtn {
+        bottom: 1rem;
+        right: 1rem;
+        width: 3rem;
+        height: 3rem;
+    }
+    
+    #backToTopBtn i {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #backToTopBtn {
+        bottom: 0.75rem;
+        right: 0.75rem;
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+    
+    #backToTopBtn i {
+        font-size: 0.875rem;
+    }
+}
+
+/* =============================================================================
+   FOOTER STYLES
+   ============================================================================= */
+
+footer {
+    background: var(--bg-primary);
+    border-top: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+footer .text-red-600 {
+    color: var(--accent-color);
+}
+
+footer a {
+    transition: all 0.2s ease;
+}
+
+footer a:hover {
+    color: var(--accent-color);
+}
+
+footer .footer-link {
+    position: relative;
+}
+
+footer .footer-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+footer .footer-link:hover::after {
+    width: 100%;
+}
+
+footer .footer-link.text-red-500::after {
+    width: 100%;
+}
+
+/* Social media icons hover effect */
+footer .fab {
+    transition: all 0.3s ease;
+}
+
+footer .fab:hover {
+    transform: translateY(-2px);
+}
+
+/* Responsive footer adjustments */
+@media (max-width: 768px) {
+    footer .grid {
+        gap: 2rem;
+    }
+    
+    footer .text-2xl {
+        font-size: 1.5rem;
+    }
+}

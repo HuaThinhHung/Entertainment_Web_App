@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
@@ -8,11 +8,12 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/theme.css">
 </head>
 
 <body class="bg-gray-900 text-white min-h-screen">
     <!-- Header -->
-    <header class="bg-gray-800 shadow-lg">
+    <header class="bg-gray-800 shadow-lg fixed top-0 left-0 right-0 z-40">
         <div class="container mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-4">
@@ -23,17 +24,18 @@
                 <nav class="hidden md:flex space-x-6">
                     <a href="index.html" class="hover:text-red-500 transition-colors">Home</a>
                     <a href="about.html" class="hover:text-red-500 transition-colors">About</a>
-                    <a href="contact.html" class="hover:text-red-500 transition-colors">Contact</a>
-                    <a href="watchlist.html" class="hover:text-red-500 transition-colors"">Watchlist</a>
+                    <a href="contact.html"
+                        class="text-red-500 font-semibold hover:text-red-400 transition-colors">Contact</a>
+                    <a href="watchlist.html" class="hover:text-red-500 transition-colors">Watchlist</a>
                 </nav>
-                <button id=" toggleThemeBtn" class="bg-gray-700 hover:bg-gray-600 p-2 rounded-lg transition-colors">
-                        <i id="themeIcon" class="fas fa-moon"></i>
-                        </button>
+                <button id="toggleThemeBtn" class="bg-gray-700 hover:bg-gray-600 p-2 rounded-lg transition-colors">
+                    <i id="themeIcon" class="fas fa-moon"></i>
+                </button>
             </div>
         </div>
     </header>
     <!-- Main Content -->
-    <main class="container mx-auto px-4 py-8">
+    <main class="container mx-auto px-4 py-8" style="padding-top: 80px;">
         <!-- Hero Section -->
         <section class="text-center mb-16">
             <h1 class="text-4xl md:text-6xl font-bold mb-6">Get in Touch</h1>
@@ -253,80 +255,64 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 mt-16">
-        <div class="container mx-auto px-4 py-8">
-            <div class="text-center">
-                <p class="text-gray-300">&copy; 2024 Entertainment Web App. All rights reserved.</p>
-                <div class="mt-4 space-x-4">
-                    <a href="index.html" class="text-gray-300 hover:text-red-500 transition-colors">Home</a>
-                    <a href="about.html" class="text-gray-300 hover:text-red-500 transition-colors">About</a>
-                    <a href="contact.html" class="text-red-500">Contact</a>
+    <footer class="mt-16">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-sm">
+                <!-- Logo & Slogan -->
+                <div class="footer-col">
+                    <div class="footer-logo">NETFLIX</div>
+                    <div class="footer-slogan">Your gateway to unlimited entertainment</div>
+                    <p class="footer-desc">Unlimited TV shows, movies, and more. Watch anywhere. Cancel anytime.</p>
+                </div>
+                <!-- Info -->
+                <div class="footer-col">
+                    <h3>Info</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="footer-link">FAQ</a></li>
+                        <li><a href="#" class="footer-link">Help Center</a></li>
+                        <li><a href="#" class="footer-link">Account</a></li>
+                        <li><a href="#" class="footer-link">Privacy</a></li>
+                    </ul>
+                </div>
+                <!-- Quick Links -->
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="footer-link">Home</a></li>
+                        <li><a href="about.html" class="footer-link">About</a></li>
+                        <li><a href="contact.html" class="footer-link">Contact</a></li>
+                        <li><a href="watchlist.html" class="footer-link">Watchlist</a></li>
+                    </ul>
+                </div>
+                <!-- Social -->
+                <div class="footer-col">
+                    <h3>Follow Us</h3>
+                    <div class="footer-social">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
                 </div>
             </div>
+            <hr class="my-6 border-gray-700" />
+            <p class="text-center text-sm footer-copyright">&copy; 2024 Netflix Clone. All rights reserved.</p>
         </div>
     </footer>
-
-    <script src="js/utils.js"></script>
+    <!-- Footer JavaScript -->
     <script>
-        // Theme toggle functionality
-        const themeBtn = document.getElementById('toggleThemeBtn');
-        const themeIcon = document.getElementById('themeIcon');
-
-        function setTheme(mode) {
-            if (mode === 'light') {
-                document.body.classList.add('light-mode');
-                themeIcon.classList.remove('fa-moon');
-                themeIcon.classList.add('fa-sun');
-                localStorage.setItem('theme', 'light');
-            } else {
-                document.body.classList.remove('light-mode');
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
-                localStorage.setItem('theme', 'dark');
+        // Highlight current page link
+        const currentPage = location.pathname.split("/").pop() || 'index.html';
+        document.querySelectorAll('.footer-link').forEach(link => {
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('text-red-500', 'font-semibold');
             }
-        }
-
-        // Load theme on page load
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'light') setTheme('light');
-        else setTheme('dark');
-
-        if (themeBtn) {
-            themeBtn.onclick = () => {
-                if (document.body.classList.contains('light-mode')) setTheme('dark');
-                else setTheme('light');
-            };
-        }
-
-        // FAQ Toggle
-        function toggleFAQ(button) {
-            const content = button.nextElementSibling;
-            const icon = button.querySelector('i');
-
-            if (content.classList.contains('hidden')) {
-                content.classList.remove('hidden');
-                icon.style.transform = 'rotate(180deg)';
-            } else {
-                content.classList.add('hidden');
-                icon.style.transform = 'rotate(0deg)';
-            }
-        }
-
-        // Contact Form Handling
-        document.getElementById('contactForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            // Get form data
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
-
-            // Show success message (in a real app, you'd send this to a server)
-            alert('Thank you for your message! I\'ll get back to you soon.');
-
-            // Reset form
-            this.reset();
         });
     </script>
+
+
+    <script src="js/theme-handler.js"></script>
+    <script src="js/scroll-handler.js"></script>
 </body>
 
 </html>
