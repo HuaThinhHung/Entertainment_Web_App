@@ -86,7 +86,3 @@ Bạn có góp ý, muốn đóng góp, hoặc đơn giản là muốn kết nố
 
 Dự án được thực hiện với ❤️ bởi Hứa Hưng
 
-⬆️ Quay lại đầu trang
-
-</div> ```
-````
