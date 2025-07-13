@@ -79,7 +79,6 @@ git clone https://github.com/HuaThinhHung/Entertainment_Web_App.git
 👉 https://github.com/HuaThinhHung/Entertainment_Web_App
 
 📬 Liên Hệ
-<div align="center">
 Bạn có góp ý, muốn đóng góp, hoặc đơn giản là muốn kết nối?
 
 📧 Email: huahung0601@gmail.com
